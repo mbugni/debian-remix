@@ -1,0 +1,62 @@
+#!/usr/bin/sh
+#
+# live: Init script for live image
+
+## Check if live system is already configured
+[ -e /.liveimg-configured ] && exit 0
+
+## Add liveuser user with no passwd
+useradd --comment "Live System User" --create-home --shell /usr/bin/bash liveuser
+passwd -d liveuser
+adduser liveuser sudo
+adduser liveuser audio
+adduser liveuser video
+adduser liveuser adm
+
+# Set up auto login for live user
+if [ -f /etc/sddm.conf ]; then
+    sed -i 's/^#User=.*/User=liveuser/' /etc/sddm.conf
+    sed -i "s/^#Session=.*/Session=plasma.desktop/" /etc/sddm.conf
+else
+cat > /etc/sddm.conf << SDDM_EOF
+[Autologin]
+User=liveuser
+Session=plasma.desktop
+SDDM_EOF
+fi
+
+## Setup installer
+if [ -f /usr/share/applications/calamares.desktop.orig ]; then
+    # Create liveuser desktop folder
+    mkdir -p  /home/liveuser/Desktop
+    # Adjust installer launcher
+    cp -a /usr/share/applications/calamares.desktop.orig /home/liveuser/Desktop/livesys-install.desktop
+    desktop-file-edit --set-key=Exec --set-value="$(find /usr/lib -name kdesu) calamares" \
+    /home/liveuser/Desktop/livesys-install.desktop
+    # Make installer icon executable to disable KDE security warning
+    chmod +x /home/liveuser/Desktop/livesys-install.desktop
+    # Add installer icon to local applications
+	mkdir -p  /home/liveuser/.local/share/applications
+    ln -s /home/liveuser/Desktop/livesys-install.desktop /home/liveuser/.local/share/applications
+    # Replace Discover icon in KDE taskmanager
+	sed -i -e 's/applications:org.kde.discover.desktop/applications:livesys-install.desktop/' \
+	/usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/config/main.xml    
+    # Patch squashfs path to match live media
+    sed -i -e 's/source: ".*"/source: "\/dev\/mapper\/live-base"/' \
+    -e 's/sourcefs: "squashfs"/sourcefs: "ext4"/' \
+    /etc/calamares/modules/unpackfs.conf
+fi
+
+## Disable plasma-discover-notifier
+if [ -f /etc/xdg/autostart/org.kde.discover.notifier.desktop ]; then
+    mkdir -p /home/liveuser/.config/autostart
+    cp -a /etc/xdg/autostart/org.kde.discover.notifier.desktop /home/liveuser/.config/autostart/
+    desktop-file-edit --set-key=Hidden --set-value=true \
+    /home/liveuser/.config/autostart/org.kde.discover.notifier.desktop
+fi
+
+## Make sure to set the right permissions for liveuser
+chown -R liveuser:liveuser /home/liveuser
+
+#>>>>> Mark things as configured and keep this at the end of this script. <<<<<
+: > /.liveimg-configured

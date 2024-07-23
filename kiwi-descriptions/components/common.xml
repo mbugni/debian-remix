@@ -1,0 +1,50 @@
+<image>
+	<profiles>
+		<profile name="CommonCore" description="Common packages"/>
+		<profile name="CommonExtras" description="Extra packages"/>
+	</profiles>
+	<packages type="image" profiles="CommonCore">
+		<!-- Core packages -->
+		<package name="binutils"/>
+		<package name="console-setup"/>
+		<package name="console-setup-linux"/>
+		<package name="curl"/>
+		<package name="sudo"/>
+		<!-- Hardware support -->
+		<package name="firmware-linux"/>
+		<package name="firmware-linux-nonfree"/>
+		<package name="firmware-iwlwifi"/>
+		<package name="firmware-realtek"/>
+		<package name="amd64-microcode"/>
+		<package name="intel-microcode"/>
+		<package name="fwupd"/>
+		<package name="fwupd-amd64-signed"/>
+		<!-- Networking -->
+		<package name="network-manager"/>
+		<package name="wireless-regdb"/>
+		<package name="wireless-tools"/>
+		<package name="wpasupplicant"/>
+		<!-- System -->
+		<package name="chrony"/>
+		<package name="initramfs-tools"/>
+		<package name="plymouth"/>
+		<package name="software-properties-common"/>
+		<!-- Tools -->
+		<package name="bash-completion"/>
+		<package name="bind9-utils"/>
+		<package name="btrfs-progs"/>
+		<package name="net-tools"/>
+		<package name="psmisc"/>
+		<package name="clinfo"/>
+		<package name="exfatprogs"/>
+		<package name="htop"/>
+		<package name="nano"/>
+		<package name="neofetch"/>
+		<package name="rsync"/>
+		<package name="unar"/>
+	</packages>
+	<packages type="image" profiles="CommonExtras">
+		<!-- Tools -->
+		<package name="unrar"/>
+	</packages>
+</image>

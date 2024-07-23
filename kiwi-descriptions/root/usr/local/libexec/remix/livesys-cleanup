@@ -1,0 +1,5 @@
+# livesys cleanup commands
+
+echo "Cleaning up livesys resources..."
+sudo sh -c 'systemctl disable livesys.service; rm /var/lib/livesys -rf
+apt autoremove --assume-yes --purge calamares\*'

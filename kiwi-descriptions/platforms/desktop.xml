@@ -1,0 +1,120 @@
+<image>
+	<profiles>
+		<profile name="Desktop" description="Desktop environment">
+			<requires profile="BootCore"/>
+			<requires profile="CommonCore"/>
+			<requires profile="CommonExtras"/>
+			<requires profile="LiveSystemInstaller"/>
+		</profile>
+		<profile name="Desktop-it_IT" description="Desktop in italian">
+			<requires profile="Desktop"/>
+			<requires profile="Localization-it_IT"/>
+		</profile>
+	</profiles>
+	<packages type="image" profiles="Desktop">
+		<!-- Display server -->
+		<package name="xorg"/>
+		<!-- Display drivers -->
+		<package name="vdpau-driver-all"/>
+		<package name="va-driver-all"/>
+		<!-- package name="mesa-dri-drivers"/ -->
+		<!-- package name="mesa-omx-drivers"/ -->
+		<package name="mesa-vulkan-drivers"/>
+		<package name="xserver-xorg-video-all"/>
+		<package name="xserver-xorg-video-intel"/>
+		<package name="xserver-xorg-input-evdev"/>
+		<package name="xserver-xorg-input-synaptics"/>
+		<!-- Display tools -->
+		<package name="mesa-utils"/>
+		<package name="vulkan-tools"/>
+		<!-- Fonts -->
+		<package name="fonts-noto-core"/>
+		<package name="fonts-noto-mono"/>
+		<package name="fonts-noto-color-emoji"/>
+		<!-- Flatpak -->
+		<package name="fonts-opensymbol"/>
+		<package name="flatpak"/>
+		<package name="flatpak-xdg-utils"/>
+		<!-- Multimedia -->
+		<package name="alsa-utils"/>
+		<package name="ffmpeg"/>
+		<package name="gstreamer1.0-packagekit"/>
+		<package name="gstreamer1.0-plugins-bad"/>
+		<package name="gstreamer1.0-plugins-good"/>
+		<package name="gstreamer1.0-plugins-ugly"/>
+		<package name="gstreamer1.0-x"/>
+		<package name="libcanberra-pulse"/>
+		<package name="libjxl-tools"/>
+		<package name="media-player-info"/>
+		<package name="pipewire-audio"/>
+		<package name="pipewire-jack"/>
+		<!-- Desktop -->
+		<package name="desktop-file-utils"/>
+		<package name="laptop-detect"/>
+		<package name="xdg-user-dirs"/>
+		<package name="xdg-utils"/>
+		<package name="task-desktop"/>
+		<package name="task-laptop"/>
+		<!-- KDE -->
+		<package name="aha"/><!-- Convert terminal output to HTML for KDE tools -->
+		<package name="ark"/>
+		<package name="breeze-gtk-theme"/>
+		<package name="dolphin"/>
+		<package name="falkon"/>
+		<package name="featherpad"/>
+		<package name="ffmpegthumbs"/>
+		<package name="kde-config-flatpak"/>
+		<package name="gwenview"/>
+		<!-- package name="ibus"/ -->
+		<package name="kactivities-bin"/>
+		<package name="kcalc"/>
+		<package name="kcharselect"/>
+		<package name="kde-config-systemd"/>
+		<package name="kde-config-gtk-style"/>
+		<package name="kde-config-gtk-style-preview"/>
+		<package name="kde-style-breeze"/>
+		<package name="plasma-runners-addons"/>
+		<package name="plasma-widgets-addons"/>
+		<package name="khelpcenter"/>
+		<package name="kinfocenter"/>
+		<package name="kio-extras"/>
+		<package name="kgamma5"/>
+		<package name="konsole"/>
+		<package name="kscreen"/>
+		<package name="kwalletmanager"/>
+		<package name="kwin-x11"/>
+		<package name="kwin-style-breeze"/>
+		<package name="okular"/>
+		<package name="libpam-kwallet5"/>
+		<package name="plasma-desktop"/>
+		<package name="plasma-discover"/>
+		<package name="plasma-discover-backend-flatpak"/>
+		<package name="plasma-discover-backend-fwupd"/>
+		<package name="milou"/>
+		<package name="plasma-nm"/><!-- Network Manager -->
+		<package name="plasma-pa"/><!-- Pulse Audio -->
+        <package name="plasma-systemmonitor"/>
+		<package name="plasma-thunderbolt"/>
+		<package name="polkit-kde-agent-1"/>
+		<package name="plasma-workspace"/>
+		<package name="sddm"/>
+		<package name="sddm-theme-debian-breeze"/>
+		<package name="kde-config-sddm"/>
+		<package name="sonnet-plugins"/>
+		<package name="kde-spectacle"/>
+		<package name="svgpart"/>
+		<package name="sweeper"/>
+		<package name="upower"/>
+		<package name="xdg-desktop-portal-kde"/>
+		<package name="xdg-desktop-portal-gnome"/>
+	</packages>
+	<packages type="uninstall" profiles="Desktop">
+		<!-- Some apps like Firefox display bad fonts with this -->
+		<package name="xfonts-75dpi"/>
+		<package name="xfonts-100dpi"/>
+	</packages>
+	<packages type="image" profiles="Desktop-it_IT">
+		<package name="featherpad-l10n"/>
+		<package name="task-italian-kde-desktop"/>
+	</packages>
+</image>

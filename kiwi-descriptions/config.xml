@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<image schemaversion="7.4" name="Debian-Remix" displayname="Debian 12 Remix">
+	<description type="system">
+		<author>Massimiliano Bugni</author>
+		<contact>massi.ergosum@gmail.com</contact>
+		<specification>Debian Remix</specification>
+	</description>
+	<preferences>
+		<release-version>12</release-version>
+		<version>12.6.0</version>
+		<packagemanager>apt</packagemanager>
+		<rpm-check-signatures>false</rpm-check-signatures>
+		<locale>en_US</locale>
+		<keytable>us</keytable>
+		<timezone>UTC</timezone>
+	</preferences>
+	<include from="this://./repositories/debian.xml"/>
+	<include from="this://./components/boot.xml"/>
+	<include from="this://./components/common.xml"/>
+	<include from="this://./components/livesystem.xml"/>
+	<include from="this://./components/localization.xml"/>
+	<include from="this://./platforms/minimal.xml"/>
+	<include from="this://./platforms/desktop.xml"/>
+	<!-- include from="this://./platforms/workstation.xml"/ -->
+	<packages type="bootstrap">
+		<package name="base-files"/>
+		<package name="linux-base"/>
+		<package name="locales"/>
+		<package name="usrmerge"/>
+		<package name="tasksel"/>
+	</packages>
+</image>

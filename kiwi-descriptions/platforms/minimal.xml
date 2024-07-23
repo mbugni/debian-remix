@@ -1,0 +1,14 @@
+<image>
+	<profiles>
+		<profile name="Minimal" description="Minimal environment">
+			<requires profile="BootCore"/>
+			<requires profile="CommonCore"/>
+			<requires profile="CommonExtras"/>
+			<requires profile="LiveSystemConsole"/>
+		</profile>
+		<profile name="Minimal-it_IT" description="Minimal it_IT">
+			<requires profile="Minimal"/>
+			<requires profile="Localization-it_IT"/>
+		</profile>
+	</profiles>
+</image>
