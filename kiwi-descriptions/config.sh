@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 set -euxo pipefail
 
@@ -21,17 +21,6 @@ echo "Profiles: [$kiwi_profiles]"
 echo "localhost" > /etc/hostname
 ## Clear machine-id on pre generated images
 truncate -s 0 /etc/machine-id
-
-#======================================
-# Configure grub correctly
-#--------------------------------------
-## Works around issues with grub-bls
-## See: https://github.com/OSInside/kiwi/issues/2198
-# echo "GRUB_DEFAULT=saved" >> /etc/default/grub
-## Disable submenus to match Fedora
-# echo "GRUB_DISABLE_SUBMENU=true" >> /etc/default/grub
-## Disable recovery entries to match Fedora
-# echo "GRUB_DISABLE_RECOVERY=true" >> /etc/default/grub
 
 #======================================
 # Setup default services
@@ -96,6 +85,9 @@ if [ -f /usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/config/m
     sed -i -e 's/\,preferred:\/\/browser//' \
     /usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/config/main.xml
 fi
+## Update system with latest software
+apt-get update && apt --assume-yes upgrade
+## Clean software management cache
 apt-get clean
 
 exit 0

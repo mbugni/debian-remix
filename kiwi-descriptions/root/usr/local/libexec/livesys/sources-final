@@ -1,0 +1,8 @@
+#!/usr/bin/sh
+#
+# Writes the final sources.list file
+#
+
+echo "Skip sources.list setup because it is already configured by the live system"
+
+exit 0
