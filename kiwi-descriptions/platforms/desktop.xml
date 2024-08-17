@@ -34,7 +34,6 @@
 		<!-- Flatpak -->
 		<package name="fonts-opensymbol"/>
 		<package name="flatpak"/>
-		<package name="flatpak-xdg-utils"/>
 		<!-- Multimedia -->
 		<package name="alsa-utils"/>
 		<package name="ffmpeg"/>
@@ -48,6 +47,8 @@
 		<package name="media-player-info"/>
 		<package name="pipewire-audio"/>
 		<package name="pipewire-jack"/>
+		<!-- Networking -->
+		<package name="firewall-applet"/>
 		<!-- Desktop -->
 		<package name="desktop-file-utils"/>
 		<package name="laptop-detect"/>
@@ -81,6 +82,7 @@
 		<package name="kgamma5"/>
 		<package name="konsole"/>
 		<package name="kscreen"/>
+		<package name="ktexteditor-katepart"/>
 		<package name="kwalletmanager"/>
 		<package name="kwin-x11"/>
 		<package name="kwin-style-breeze"/>

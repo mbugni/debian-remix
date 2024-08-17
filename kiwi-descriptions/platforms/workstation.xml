@@ -11,25 +11,26 @@
 	<packages type="image" profiles="Workstation">
 		<!-- Bluetooth -->
 		<package name="bluedevil"/>
+		<package name="bluez-firmware"/>
 		<!-- package name="bluez-hid2hci"/ --> 
 		<package name="bluez-obexd"/>
-		<!-- package name="bluez-tools"/ -->
+		<package name="bluez-tools"/>
 		<!-- Connectivity -->
-		<package name="kde-connect"/>
+		<package name="avahi-daemon"/>
+		<package name="kdeconnect"/>
 		<package name="kio-extras"/>
 		<!-- Networking -->
-		<namedCollection name="networkmanager-submodules"/>
-		<package name="plasma-nm-l2tp"/>
-		<package name="plasma-nm-openvpn"/>
-		<package name="plasma-nm-pptp"/>
+		<package name="network-manager-l2tp"/>
+		<package name="network-manager-openvpn"/>
+		<package name="network-manager-pptp"/>
 		<!-- Printing -->
-		<namedCollection name="print-client"/>
+		<package name="cups"/>
+		<package name="cups-ipp-utils"/>
 		<package name="hplip"/>
-		<package name="cups-ipptool"/>
-		<package name="cups-lpd"/>
-		<package name="kde-print-manager"/>
+		<package name="print-manager"/>
 		<!-- Scanning -->
-		<package name="sane-backends-drivers-cameras"/>
-		<package name="sane-backends-drivers-scanners"/>		
+		<package name="sane-airscan"/>
+		<package name="sane-utils"/>
+		<package name="libsane-hpaio"/>
 	</packages>
 </image>

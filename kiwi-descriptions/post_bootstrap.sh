@@ -24,9 +24,11 @@ echo "LANG=en_US.UTF-8" > /etc/default/locale
 if [[ "$kiwi_profiles" == *"Localization"* ]]; then
     livesys_locale="${kiwi_language}.UTF-8"
     livesys_language="${kiwi_language}"
+    echo "Set up language ${livesys_locale}"
 	localedef -i ${livesys_language} -c -f UTF-8 ${livesys_locale}
     echo "${livesys_locale} UTF-8" >> /etc/locale.gen
-    echo "LANG=${livesys_locale}" > /etc/default/locale
+    # Setup system-wide locale
+	echo "LANG=${livesys_locale}" > /etc/default/locale
 fi
 echo "Generate locales..."
 locale-gen

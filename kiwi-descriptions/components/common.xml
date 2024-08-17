@@ -21,6 +21,9 @@
 		<package name="fwupd-amd64-signed"/>
 		<!-- Networking -->
 		<package name="network-manager"/>
+		<package name="firewalld"/>
+		<!-- The following is moved to post-install scripts to avoid build DNS issues -->
+		<!-- package name="systemd-resolved"/ -->
 		<package name="wireless-regdb"/>
 		<package name="wireless-tools"/>
 		<package name="wpasupplicant"/>

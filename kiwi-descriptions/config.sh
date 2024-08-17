@@ -87,6 +87,12 @@ if [ -f /usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/config/m
 fi
 ## Update system with latest software
 apt-get update && apt --assume-yes upgrade
+## Install systemd-resolved here because it breaks previous scripts cause DNS resolution
+apt --assume-yes install systemd-resolved libnss-resolve libnss-myhostname
+## Purge old kernels (if any)
+## See https://ostechnix.com/remove-old-unused-linux-kernels/
+echo $(dpkg --list | grep linux-image | awk '{ print $2 }' | sort -V | sed -n '/'`uname -r`'/q;p') \
+	 | xargs apt -y purge
 ## Clean software management cache
 apt-get clean
 
