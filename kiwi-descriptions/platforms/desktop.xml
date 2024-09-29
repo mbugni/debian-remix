@@ -48,7 +48,7 @@
 		<package name="pipewire-audio"/>
 		<package name="pipewire-jack"/>
 		<!-- Networking -->
-		<package name="firewall-applet"/>
+		<package name="firewall-config"/>
 		<!-- Desktop -->
 		<package name="desktop-file-utils"/>
 		<package name="laptop-detect"/>
@@ -65,7 +65,6 @@
 		<package name="featherpad"/>
 		<package name="ffmpegthumbs"/>
 		<package name="kde-config-flatpak"/>
-		<package name="gwenview"/>
 		<!-- package name="ibus"/ -->
 		<package name="kactivities-bin"/>
 		<package name="kcalc"/>
@@ -74,6 +73,7 @@
 		<package name="kde-config-gtk-style"/>
 		<package name="kde-config-gtk-style-preview"/>
 		<package name="kde-style-breeze"/>
+		<package name="kdegraphics-thumbnailers"/>
 		<package name="plasma-runners-addons"/>
 		<package name="plasma-widgets-addons"/>
 		<package name="khelpcenter"/>
@@ -86,7 +86,6 @@
 		<package name="kwalletmanager"/>
 		<package name="kwin-x11"/>
 		<package name="kwin-style-breeze"/>
-		<package name="okular"/>
 		<package name="libpam-kwallet5"/>
 		<package name="plasma-desktop"/>
 		<package name="plasma-discover"/>
@@ -97,8 +96,9 @@
 		<package name="plasma-pa"/><!-- Pulse Audio -->
         <package name="plasma-systemmonitor"/>
 		<package name="plasma-thunderbolt"/>
-		<package name="polkit-kde-agent-1"/>
 		<package name="plasma-workspace"/>
+		<package name="polkit-kde-agent-1"/>
+		<package name="powerdevil"/>
 		<package name="sddm"/>
 		<package name="sddm-theme-debian-breeze"/>
 		<package name="kde-config-sddm"/>

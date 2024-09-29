@@ -4,10 +4,10 @@
 This project is a Debian remix (like a [Debian Live][01]) and aims to offer a complete system for multipurpose usage with localization support. You can [download a live image][02] and try the software, and then install it in your PC if you want.
 You can also customize the image starting from available scripts.
 
-Other goals of this remix are:
-* adding common extra-repos
-* supporting multimedia and office (printers and scanners)
+Main goals of this remix are:
 * Flatpak apps usage
+* adding common extra-repos
+* supporting printers and scanners
 
 ## How to build the LiveCD
 [See a detailed description][03] about how to build the live media.
@@ -25,7 +25,7 @@ Choose or create a `<target-path>` folder where to put results.
 Install Podman:
 
 ```shell
-$ sudo apt --assume-yes install podman
+$ sudo apt --assume-yes install podman containers-storage fuse-overlayfs
 ```
 
 Create the container for the build enviroment:
@@ -92,25 +92,19 @@ $ sudo dd if=/<target-path>/Debian-Remix.x86_64-<version>.iso of=/dev/<stick-dev
 ```
 
 ## Post-install tasks
-After installation, you can remove live system resources to save space by running:
+After installation, remove live system resources to save space by running:
 
 ```shell
 $ source /usr/local/libexec/remix/livesys-cleanup
 ```
 
-A Flatpak quick setup script is provided:
-
-```shell
-$ source /usr/local/libexec/remix/flatpak-setup
-```
-
 ## ![Bandiera italiana][04] Per gli utenti italiani
 Questo è un remix di Debian (analogo ad un [Debian Live][01]) con il supporto in italiano per lingua e tastiera. Nell'[immagine .iso][02] che si ottiene sono già installati i pacchetti e le configurazioni per il funzionamento in italiano delle varie applicazioni (come l'ambiente grafico, i repo extra etc).
 
-Il remix ha come obiettivi anche:
-* aggiunta dei repository comuni
-* supporto per applicazioni multimediali e da ufficio (stampanti e scanner)
+Il remix ha come obiettivi principali:
 * utilizzo delle applicazioni Flatpak
+* aggiunta dei repository comuni
+* supporto per stampanti e scanner
 
 ## Change Log
 All notable changes to this project will be documented in the [`CHANGELOG.md`](CHANGELOG.md) file.

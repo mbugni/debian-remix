@@ -13,6 +13,7 @@
 		<!-- Hardware support -->
 		<package name="firmware-linux"/>
 		<package name="firmware-linux-nonfree"/>
+		<package name="firmware-brcm80211"/>
 		<package name="firmware-iwlwifi"/>
 		<package name="firmware-realtek"/>
 		<package name="amd64-microcode"/>
@@ -36,6 +37,7 @@
 		<package name="bash-completion"/>
 		<package name="bind9-utils"/>
 		<package name="btrfs-progs"/>
+		<package name="dmidecode"/>
 		<package name="net-tools"/>
 		<package name="psmisc"/>
 		<package name="clinfo"/>

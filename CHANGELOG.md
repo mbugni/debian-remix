@@ -1,3 +1,13 @@
+## 12.7.0 - 2024-09-29
+### Added
+- Custom user Flatpak setup
+- Custom machine setup
+- Broadcom WiFi support
+### Changed
+- Improve scan and print support
+- Better live system cleanup
+- Minimize dependencies
+
 ## 12.6.1 - 2024-08-17
 ### Added
 - Workstation edition with scan and print support

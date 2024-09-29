@@ -16,9 +16,11 @@
 		<package name="bluez-obexd"/>
 		<package name="bluez-tools"/>
 		<!-- Connectivity -->
-		<package name="avahi-daemon"/>
+		<package name="ipp-usb"/>
 		<package name="kdeconnect"/>
 		<package name="kio-extras"/>
+		<!-- Hardware support -->
+		<package name="libsane-hpaio"/>
 		<!-- Networking -->
 		<package name="network-manager-l2tp"/>
 		<package name="network-manager-openvpn"/>
@@ -31,6 +33,5 @@
 		<!-- Scanning -->
 		<package name="sane-airscan"/>
 		<package name="sane-utils"/>
-		<package name="libsane-hpaio"/>
 	</packages>
 </image>

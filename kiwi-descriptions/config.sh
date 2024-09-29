@@ -53,11 +53,13 @@ if [[ "$kiwi_profiles" == *"LiveSystemGraphical"* ]]; then
 	echo "Set up desktop ${kiwi_displayname}"
 	# Set up default boot theme
 	/usr/sbin/plymouth-set-default-theme spinner
-	# Enable livesys services
-	systemctl enable livesys.service
+	# Enable livesys session service
+	systemctl enable livesys-session.service
 	# Set up Flatpak
 	echo "Setting up Flathub repo..."
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+	# Enable Flatpak user settings
+	systemctl --global enable flatpak-setup.service
 fi
 
 #======================================
@@ -78,6 +80,8 @@ fi
 #======================================
 # Remix	fixes and tweaks
 #--------------------------------------
+## Enable machine system settings
+systemctl enable machine-setup
 ## Replace default prompt system wide
 sed -i -e "s/PS1='.*'/\. \/etc\/profile\.d\/color-prompt\.sh/" /etc/bash.bashrc
 ## Remove preferred browser icon in KDE taskmanager
