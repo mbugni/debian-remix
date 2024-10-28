@@ -2,12 +2,6 @@
 #
 # machine: system settings
 
-dracut_live_conf="$(ls /etc/dracut.conf.d/*livecd.conf 2> /dev/null)"
-if [ ! -z "$dracut_live_conf" ]; then
-    echo "Avoid to add live components to initramfs"
-    rm ${dracut_live_conf} -f
-fi
-
 system_product_name="$(dmidecode --string system-product-name)"
 if [ "$system_product_name" == "HP 250 G8 Notebook PC" ]; then
     # When closing laptop lid airplane mode comes on and won't go off:

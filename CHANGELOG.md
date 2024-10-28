@@ -1,3 +1,10 @@
+## 12.7.1 - 2024-10-28
+### Added
+- ZRam support using systemd-zram-generator
+### Changed
+- Get rid of debootstrap (from kiwi-ng 10.0.28)
+- systemd-timesyncd instead of chrony
+
 ## 12.7.0 - 2024-09-29
 ### Added
 - Custom user Flatpak setup

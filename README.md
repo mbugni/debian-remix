@@ -37,7 +37,7 @@ $ sudo podman build --file=/<source-path>/Containerfile --tag=livebuild:deb12
 Initialize the container by running an interactive shell:
 
 ```shell
-$ sudo podman run --privileged --network=host -it --volume=/dev:/dev:ro \
+$ sudo podman run --privileged --network=host -it \
 --volume=/<source-path>:/live/source:ro --volume=/<target-path>:/live/target \
 --name=livebuild-deb12 --hostname=livebuild-deb12 livebuild:deb12 /usr/bin/bash
 ```

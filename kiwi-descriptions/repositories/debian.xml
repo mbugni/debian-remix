@@ -1,5 +1,5 @@
 <image>
         <repository type="apt-deb" distribution="bookworm" components="main contrib non-free non-free-firmware" repository_gpgcheck="false">
-                <source path="http://deb.debian.org/debian" />
+                <source path="https://deb.debian.org/debian" />
         </repository>
 </image>

@@ -27,8 +27,6 @@ truncate -s 0 /etc/machine-id
 #--------------------------------------
 ## Enable NetworkManager
 systemctl enable NetworkManager.service
-## Enable chrony
-systemctl enable chrony.service
 
 #======================================
 # Setup default target
@@ -40,16 +38,19 @@ else
 fi
 
 #======================================
-# Remix root user
+# Remix livesystem
 #--------------------------------------
-## Delete and lock the root user password
-passwd -d root
-passwd -l root
+if [[ "$kiwi_profiles" == *"LiveSystem"* ]]; then
+	echo "Delete the root user password"
+	passwd -d root
+fi
 
 #======================================
 # Remix graphical
 #--------------------------------------
 if [[ "$kiwi_profiles" == *"LiveSystemGraphical"* ]]; then
+	echo "Lock the root user password"
+	passwd -l root
 	echo "Set up desktop ${kiwi_displayname}"
 	# Set up default boot theme
 	/usr/sbin/plymouth-set-default-theme spinner
@@ -65,6 +66,7 @@ fi
 #======================================
 # Remix localization
 #--------------------------------------
+# /etc/default/locale is set in post_bootstrap.sh
 if [[ "$kiwi_profiles" == *"Localization"* ]]; then
 	livesys_locale="${kiwi_language}.UTF-8"
 	livesys_language="${kiwi_language}"
@@ -90,7 +92,7 @@ if [ -f /usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/config/m
     /usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/config/main.xml
 fi
 ## Update system with latest software
-apt-get update && apt --assume-yes upgrade
+apt --assume-yes upgrade
 ## Install systemd-resolved here because it breaks previous scripts cause DNS resolution
 apt --assume-yes install systemd-resolved libnss-resolve libnss-myhostname
 ## Purge old kernels (if any)

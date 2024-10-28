@@ -40,22 +40,23 @@ locale -a
 ## Configure additional sources
 source /etc/os-release
 cat << EOF > /etc/apt/sources.list
-# See https://wiki.debian.org/SourcesList for more information.
-deb http://deb.debian.org/debian $VERSION_CODENAME main non-free-firmware contrib non-free
-#deb-src http://deb.debian.org/debian $VERSION_CODENAME main non-free-firmware contrib non-free
+# See https://wiki.debian.org/SourcesList for more information
+deb https://deb.debian.org/debian $VERSION_CODENAME main non-free-firmware contrib non-free
+#deb-src https://deb.debian.org/debian $VERSION_CODENAME main non-free-firmware contrib non-free
 
-deb http://deb.debian.org/debian $VERSION_CODENAME-updates main non-free-firmware contrib non-free
-#deb-src http://deb.debian.org/debian $VERSION_CODENAME-updates main non-free-firmware contrib non-free
+deb https://deb.debian.org/debian $VERSION_CODENAME-updates main non-free-firmware contrib non-free
+#deb-src https://deb.debian.org/debian $VERSION_CODENAME-updates main non-free-firmware contrib non-free
 
-deb http://security.debian.org/debian-security/ $VERSION_CODENAME-security main non-free-firmware contrib non-free
-#deb-src http://security.debian.org/debian-security/ $VERSION_CODENAME-security main non-free-firmware contrib non-free
+deb https://security.debian.org/debian-security/ $VERSION_CODENAME-security main non-free-firmware contrib non-free
+#deb-src https://security.debian.org/debian-security/ $VERSION_CODENAME-security main non-free-firmware contrib non-free
 
 # Backports allow you to install newer versions of software made available for this release
-deb http://deb.debian.org/debian $VERSION_CODENAME-backports main non-free-firmware contrib non-free
-#deb-src http://deb.debian.org/debian $VERSION_CODENAME-backports main non-free-firmware contrib non-free
+deb https://deb.debian.org/debian $VERSION_CODENAME-backports main non-free-firmware contrib non-free
+#deb-src https://deb.debian.org/debian $VERSION_CODENAME-backports main non-free-firmware contrib non-free
 EOF
+## Update package database
+apt update
 ## No interaction during install
-export DEBIAN_FRONTEND=noninteractive
-export APT_LISTCHANGES_FRONTED=none
+export APT_LISTCHANGES_FRONTED=none DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true
 ## Setup base system
 tasksel install standard

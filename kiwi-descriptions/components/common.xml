@@ -29,10 +29,10 @@
 		<package name="wireless-tools"/>
 		<package name="wpasupplicant"/>
 		<!-- System -->
-		<package name="chrony"/>
 		<package name="initramfs-tools"/>
 		<package name="plymouth"/>
 		<package name="software-properties-common"/>
+		<package name="systemd-zram-generator"/>
 		<!-- Tools -->
 		<package name="bash-completion"/>
 		<package name="bind9-utils"/>
