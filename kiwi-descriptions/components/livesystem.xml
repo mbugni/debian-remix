@@ -7,34 +7,26 @@
 		<profile name="LiveSystemGraphical" description="Live system graphical">
 			<requires profile="LiveSystemCore"/>
 		</profile>
-		<profile name="LiveSystemInstaller" description="Live system installer">
-			<requires profile="LiveSystemGraphical"/>
-		</profile>
 	</profiles>
 	<packages type="image" profiles="LiveSystemCore">
 		<!-- package name="kiwi-dracut-live"/ -->
 		<package name="dracut-live"/>
-		<package name="dracut-network"/>
 		<package name="dracut-squash"/>
+		<package name="dracut-network"/>
 	</packages>
-	<preferences profiles="LiveSystemConsole">
-		<type image="iso" primary="true" flags="dmsquash" hybridpersistent_filesystem="ext4"
-				hybridpersistent="true"	volid="Debian_Remix" firmware="uefi" kernelcmdline="quiet">
-			<bootloader name="grub2"/>
-		</type>
-	</preferences>
+	<packages type="image" profiles="LiveSystemConsole">
+		<package name="plymouth"/>
+	</packages>
 	<packages type="image" profiles="LiveSystemGraphical">
 		<package name="plymouth-themes"/>
+		<!-- Calamares installer -->
+		<package name="calamares"/>
+		<package name="calamares-settings-debian"/>
 	</packages>
-	<preferences profiles="LiveSystemGraphical">
+	<preferences>
 		<type image="iso" primary="true" flags="dmsquash" hybridpersistent_filesystem="ext4"
 				hybridpersistent="true"	volid="Debian_Remix" firmware="uefi" kernelcmdline="splash quiet">
 			<bootloader name="grub2"/>
 		</type>
 	</preferences>
-	<packages type="image" profiles="LiveSystemInstaller">
-		<!-- Calamares -->
-		<package name="calamares"/>
-		<package name="calamares-settings-debian"/>
-	</packages>
 </image>

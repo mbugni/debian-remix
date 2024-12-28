@@ -1,9 +1,0 @@
-#!/usr/bin/sh
-
-## Disable plasma-discover-notifier
-if [ -f /etc/xdg/autostart/org.kde.discover.notifier.desktop ]; then
-    mkdir -p /home/liveuser/.config/autostart
-    cp -a /etc/xdg/autostart/org.kde.discover.notifier.desktop /home/liveuser/.config/autostart/
-    desktop-file-edit --set-key=Hidden --set-value=true \
-    /home/liveuser/.config/autostart/org.kde.discover.notifier.desktop
-fi

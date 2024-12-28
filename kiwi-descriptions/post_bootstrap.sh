@@ -3,15 +3,9 @@
 set -euxo pipefail
 
 #======================================
-# Functions...
-#--------------------------------------
-test -f /.kconfig && . /.kconfig
-test -f /.profile && . /.profile
-
-#======================================
 # Greeting...
 #--------------------------------------
-echo "Bootstrap image: [$kiwi_iname]-[$kiwi_iversion]..."
+echo "Bootstrap image: [$kiwi_iname]-[$kiwi_iversion]"
 echo "Profiles: [$kiwi_profiles]"
 
 #======================================
@@ -21,14 +15,10 @@ localedef -i en_US -c -f UTF-8 en_US.UTF-8
 echo "C.UTF-8 UTF-8" > /etc/locale.gen
 echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 echo "LANG=en_US.UTF-8" > /etc/default/locale
-if [[ "$kiwi_profiles" == *"Localization"* ]]; then
-    livesys_locale="${kiwi_language}.UTF-8"
-    livesys_language="${kiwi_language}"
-    echo "Set up language ${livesys_locale}"
-	localedef -i ${livesys_language} -c -f UTF-8 ${livesys_locale}
-    echo "${livesys_locale} UTF-8" >> /etc/locale.gen
-    # Setup system-wide locale
-	echo "LANG=${livesys_locale}" > /etc/default/locale
+if [[ "$kiwi_profiles" == *"l10n"* ]]; then
+	echo "Update locales..."
+	echo "it_IT.UTF-8 UTF-8" >> /etc/locale.gen
+	localedef -i it_IT -c -f UTF-8 it_IT.UTF-8
 fi
 echo "Generate locales..."
 locale-gen

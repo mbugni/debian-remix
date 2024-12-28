@@ -3,15 +3,9 @@
 set -euxo pipefail
 
 #======================================
-# Functions...
-#--------------------------------------
-test -f /.kconfig && . /.kconfig
-test -f /.profile && . /.profile
-
-#======================================
 # Greeting...
 #--------------------------------------
-echo "Configure image: [$kiwi_iname]-[$kiwi_iversion]..."
+echo "Configure image: $kiwi_iname-$kiwi_iversion"
 echo "Profiles: [$kiwi_profiles]"
 
 #======================================
@@ -27,6 +21,8 @@ truncate -s 0 /etc/machine-id
 #--------------------------------------
 ## Enable NetworkManager
 systemctl enable NetworkManager.service
+## Enable systemd-timesyncd
+systemctl enable systemd-timesyncd
 
 #======================================
 # Setup default target
@@ -43,44 +39,49 @@ fi
 if [[ "$kiwi_profiles" == *"LiveSystem"* ]]; then
 	echo "Delete the root user password"
 	passwd -d root
+	if [[ "$kiwi_profiles" == *"LiveSystemConsole"* ]]; then
+		echo "Delete the liveuser password"
+		passwd -d liveuser
+		# Set up default boot theme
+		/usr/sbin/plymouth-set-default-theme details
+	fi
 fi
 
 #======================================
 # Remix graphical
 #--------------------------------------
 if [[ "$kiwi_profiles" == *"LiveSystemGraphical"* ]]; then
-	echo "Lock the root user password"
+	echo "Lock the root user account"
 	passwd -l root
-	echo "Set up desktop ${kiwi_displayname}"
 	# Set up default boot theme
 	/usr/sbin/plymouth-set-default-theme spinner
 	# Enable livesys session service
-	systemctl enable livesys-session.service
+	systemctl enable livesys-setup.service
+	# Enable remix session settings
+	systemctl --global enable remix-session.service
 	# Set up Flatpak
 	echo "Setting up Flathub repo..."
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-	# Enable Flatpak user settings
-	systemctl --global enable flatpak-setup.service
 fi
 
 #======================================
 # Remix localization
 #--------------------------------------
-# /etc/default/locale is set in post_bootstrap.sh
-if [[ "$kiwi_profiles" == *"Localization"* ]]; then
+echo "LANG=en_US.UTF-8" > /etc/default/locale
+if [[ "$kiwi_profiles" == *"l10n"* ]]; then
 	livesys_locale="${kiwi_language}.UTF-8"
-	livesys_language="${kiwi_language}"
-	livesys_keymap="${kiwi_keytable}"
-	echo "Set up language ${livesys_locale}"
+	echo "Set up locale ${livesys_locale}"
+	# Setup system-wide locale
+	echo "LANG=${livesys_locale}" > /etc/default/locale
 	# Replace default locale settings
-	sed -i 's/^XKBLAYOUT=.*/XKBLAYOUT="'${livesys_keymap}'"/' /etc/default/keyboard
+	sed -i 's/^XKBLAYOUT=.*/XKBLAYOUT="'${kiwi_keytable}'"/' /etc/default/keyboard
 	sed -i "s/^LANG=.*/LANG=${livesys_locale}/" /etc/xdg/plasma-localerc
-	sed -i "s/^LANGUAGE=.*/LANGUAGE="${livesys_language}"/" /etc/xdg/plasma-localerc
-	sed -i "s/^defaultLanguage=.*/defaultLanguage=${livesys_language}/" /etc/skel/.config/KDE/Sonnet.conf
+	sed -i "s/^LANGUAGE=.*/LANGUAGE="${kiwi_language}"/" /etc/xdg/plasma-localerc
+	sed -i "s/^defaultLanguage=.*/defaultLanguage=${kiwi_language}/" /etc/skel/.config/KDE/Sonnet.conf
 fi
 
 #======================================
-# Remix	fixes and tweaks
+# Remix	settings and tweaks
 #--------------------------------------
 ## Enable machine system settings
 systemctl enable machine-setup
@@ -95,11 +96,18 @@ fi
 apt --assume-yes upgrade
 ## Install systemd-resolved here because it breaks previous scripts cause DNS resolution
 apt --assume-yes install systemd-resolved libnss-resolve libnss-myhostname
+
+#======================================
+# Remix	system clean
+#--------------------------------------
 ## Purge old kernels (if any)
 ## See https://ostechnix.com/remove-old-unused-linux-kernels/
-echo $(dpkg --list | grep linux-image | awk '{ print $2 }' | sort -V | sed -n '/'`uname -r`'/q;p') \
-	 | xargs apt -y purge
+last_kernel=$(dpkg --list | awk '{ print $2 }' | grep -E 'linux-image-.+-.+-.+' | \
+	sort --version-sort | tail --lines=1)
+echo "Purge old kernels and keep $last_kernel"
+dpkg --list | awk '{ print $2 }' | grep -E 'linux-image-.+-.+-.+' | \
+	{ grep --invert-match $last_kernel || true; } | xargs apt --assume-yes purge
 ## Clean software management cache
-apt-get clean
+apt clean
 
 exit 0

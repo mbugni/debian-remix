@@ -1,7 +1,7 @@
 <image>
 	<profiles>
-		<profile name="CommonCore" description="Common packages"/>
-		<profile name="CommonExtras" description="Extra packages"/>
+		<profile name="CommonCore" description="Core packages"/>
+		<profile name="Common-l10n" description="Localization"/>
 	</profiles>
 	<packages type="image" profiles="CommonCore">
 		<!-- Core packages -->
@@ -19,11 +19,11 @@
 		<package name="amd64-microcode"/>
 		<package name="intel-microcode"/>
 		<package name="fwupd"/>
-		<package name="fwupd-amd64-signed"/>
+		<package name="fwupd-amd64-signed" arch="x86_64"/>
 		<!-- Networking -->
 		<package name="network-manager"/>
 		<package name="firewalld"/>
-		<!-- The following is moved to post-install scripts to avoid build DNS issues -->
+		<!-- The following is moved to config.sh script to avoid DNS issues during build -->
 		<!-- package name="systemd-resolved"/ -->
 		<package name="wireless-regdb"/>
 		<package name="wireless-tools"/>
@@ -47,9 +47,15 @@
 		<package name="neofetch"/>
 		<package name="rsync"/>
 		<package name="unar"/>
-	</packages>
-	<packages type="image" profiles="CommonExtras">
-		<!-- Tools -->
 		<package name="unrar"/>
+	</packages>
+	<preferences profiles="Common-l10n">
+		<locale>it_IT</locale>
+		<keytable>it</keytable>
+		<timezone>Europe/Rome</timezone>
+	</preferences>
+	<packages type="image" profiles="Common-l10n">
+		<package name="hunspell-it"/>
+		<package name="task-italian"/>
 	</packages>
 </image>

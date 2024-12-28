@@ -1,4 +1,0 @@
-#!/usr/bin/sh
-
-## Make sure to set the right permissions for liveuser
-chown -R liveuser:liveuser /home/liveuser

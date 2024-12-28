@@ -1,0 +1,34 @@
+#!/usr/bin/bash
+#
+# livesys-setup: configuration scripts for live system
+
+## Check if live system is already configured
+[ -e /.livesys-configured ] && exit 0
+
+echo 'Setup liveuser'
+## Add liveuser user with no passwd
+useradd --comment "Live System User" --create-home --shell /usr/bin/bash liveuser
+passwd -d liveuser > /dev/null
+usermod -aG audio,video,lpadmin,adm,sudo liveuser > /dev/null
+
+echo 'Setup livesys installer'
+### Calamares settings
+rsync -a /usr/local/libexec/livesys/calamares/ /etc/calamares/
+### Mask original installer actions
+desktop-file-edit --set-key=Hidden --set-value=true /usr/share/applications/install-debian.desktop
+desktop-file-edit --set-key=Hidden --set-value=true /etc/xdg/autostart/calamares-desktop-icon.desktop
+### Skip Calamares APT configuration (no need to modify because it's already set)
+sed -i 's/- sources-final/# sources-final/' /etc/calamares/settings.conf
+
+## Configure session at liveuser login
+echo 'source /usr/local/libexec/livesys/session-setup' >> '/usr/local/libexec/remix/session-setup'
+
+echo 'Setup graphical session'
+source /usr/local/libexec/livesys/graphical-setup
+
+echo 'Finish liveuser setup'
+## Make sure to set the right permissions for liveuser
+chown -R liveuser:liveuser /home/liveuser
+
+## Mark things as configured and keep this at the end of this script!
+touch /.livesys-configured

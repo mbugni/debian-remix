@@ -3,12 +3,11 @@
 		<profile name="Desktop" description="Desktop environment">
 			<requires profile="BootCore"/>
 			<requires profile="CommonCore"/>
-			<requires profile="CommonExtras"/>
-			<requires profile="LiveSystemInstaller"/>
+			<requires profile="LiveSystemGraphical"/>
 		</profile>
-		<profile name="Desktop-it_IT" description="Desktop in italian">
+		<profile name="Desktop-l10n" description="Desktop localization">
 			<requires profile="Desktop"/>
-			<requires profile="Localization-it_IT"/>
+			<requires profile="Common-l10n"/>
 		</profile>
 	</profiles>
 	<packages type="image" profiles="Desktop">
@@ -115,7 +114,7 @@
 		<package name="xfonts-75dpi"/>
 		<package name="xfonts-100dpi"/>
 	</packages>
-	<packages type="image" profiles="Desktop-it_IT">
+	<packages type="image" profiles="Desktop-l10n">
 		<package name="featherpad-l10n"/>
 		<package name="task-italian-kde-desktop"/>
 	</packages>

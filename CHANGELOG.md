@@ -1,3 +1,8 @@
+## 12.8.0 - 2024-12-28
+### Changed
+- Improve Calamares settings
+- Better scripts organization
+
 ## 12.7.1 - 2024-10-28
 ### Added
 - ZRam support using systemd-zram-generator

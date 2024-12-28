@@ -1,16 +1,16 @@
 # Debian Remix
 
 ## Purpose
-This project is a Debian remix (like a [Debian Live][01]) and aims to offer a complete system for multipurpose usage with localization support. You can [download a live image][02] and try the software, and then install it in your PC if you want.
+This project is a Debian/KDE remix (like a [Debian Live][01]) and aims to be a complete system for personal computing with localization support. You can [download a live image][02] and try the software, and then install it in your PC if you want.
 You can also customize the image starting from available scripts.
 
 Main goals of this remix are:
 * Flatpak apps usage
 * adding common extra-repos
-* supporting printers and scanners
+* supporting external devices (like printers and scanners)
 
 ## How to build the LiveCD
-[See a detailed description][03] about how to build the live media.
+[See a detailed description][03] about how to build a live media using kiwi-ng.
 
 ### Prepare the working directories
 Clone the project into your `<source-path>` to get sources:
@@ -42,7 +42,8 @@ $ sudo podman run --privileged --network=host -it \
 --name=livebuild-deb12 --hostname=livebuild-deb12 livebuild:deb12 /usr/bin/bash
 ```
 
-The container can be reused and upgraded multiple times. See [Podman docs][06] for more details.
+Exit from the build container. The container can be reused and upgraded multiple times.
+See [Podman docs][06] for more details.
 
 To enter again into the build container:
 
@@ -57,20 +58,20 @@ First, start the build container if not running:
 $ sudo podman start livebuild-deb12
 ```
 
-Choose a variant (eg: KDE workstation with italian support) that corresponds to a profile (eg: `Workstation-it_IT`).
+Choose a variant (eg: workstation with localization support) that corresponds to a profile (eg: `Workstation-l10n`).
 
 Available profiles/variants are:
 * `Minimal` (console only, mainly for testing)
 * `Desktop` (minimal KDE environment with basic tools)
 * `Workstation` (KDE environment with more features like printing and scanning support)
 
-For each variant you can append `-it_IT` to get italian localization (eg: `Desktop-it_IT`).
+For each variant you can append `-l10n` to get italian localization (eg: `Desktop-l10n`).
 
 Build the .iso image by running the `kiwi-ng` command:
 
 ```shell
-$ sudo podman exec livebuild-deb12 kiwi-ng --profile=Workstation-it_IT --type=iso \
---shared-cache-dir=/live/target/cache system build \
+$ sudo podman exec livebuild-deb12 kiwi-ng --profile=Workstation-l10n --type=iso \
+--debug --color-output --shared-cache-dir=/live/target/cache system build \
 --description=/live/source/kiwi-descriptions --target-dir=/live/target
 ```
 
@@ -99,12 +100,12 @@ $ source /usr/local/libexec/remix/livesys-cleanup
 ```
 
 ## ![Bandiera italiana][04] Per gli utenti italiani
-Questo è un remix di Debian (analogo ad un [Debian Live][01]) con il supporto in italiano per lingua e tastiera. Nell'[immagine .iso][02] che si ottiene sono già installati i pacchetti e le configurazioni per il funzionamento in italiano delle varie applicazioni (come l'ambiente grafico, i repo extra etc).
+Questo è un remix di Debian/KDE (analogo ad un [Debian Live][01]) per computer ad uso personale con il supporto in italiano. Nell'[immagine .iso][02] che si ottiene sono già installati i pacchetti e le configurazioni per il funzionamento in italiano del sistema (come l'ambiente grafico, i repo extra etc).
 
 Il remix ha come obiettivi principali:
 * utilizzo delle applicazioni Flatpak
 * aggiunta dei repository comuni
-* supporto per stampanti e scanner
+* supporto per dispositivi esterni (come stampanti e scanner)
 
 ## Change Log
 All notable changes to this project will be documented in the [`CHANGELOG.md`](CHANGELOG.md) file.
