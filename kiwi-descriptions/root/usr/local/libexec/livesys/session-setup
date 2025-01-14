@@ -8,20 +8,8 @@ DESKTOP_DIR=$(xdg-user-dir DESKTOP)
 # Check if installer is already configured
 [ -e $DESKTOP_DIR/livesys-install.desktop ] && exit 0
 
-# Create ~/Desktop just in case this runs before the xdg creation script
-mkdir -p $DESKTOP_DIR
-
-# Add installer icon to local applications
-cp -a /usr/share/applications/calamares.desktop.orig $DESKTOP_DIR/livesys-install.desktop
-
-# Adjust installer launcher
-installer_cmd="$(find /usr/lib -name kdesu) calamares"
-desktop-file-edit --set-key=Exec --set-value="$installer_cmd" $DESKTOP_DIR/livesys-install.desktop
+# Add installer icon to liveuser desktop
+cp -a /usr/share/applications/livesys-install.desktop $DESKTOP_DIR/livesys-install.desktop
 
 # Make installer icon executable to disable KDE security warning
 chmod +x $DESKTOP_DIR/livesys-install.desktop
-
-# Create liveuser installer application
-APPLICATIONS_DIR=$HOME/.local/share/applications
-mkdir -p $APPLICATIONS_DIR
-ln -s $DESKTOP_DIR/livesys-install.desktop $APPLICATIONS_DIR/livesys-install.desktop

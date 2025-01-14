@@ -96,7 +96,7 @@ $ sudo dd if=/<target-path>/Debian-Remix.x86_64-<version>.iso of=/dev/<stick-dev
 After installation, remove live system resources to save space by running:
 
 ```shell
-$ source /usr/local/libexec/remix/livesys-cleanup
+$ /usr/local/libexec/remix/livesys-cleanup
 ```
 
 ## ![Bandiera italiana][04] Per gli utenti italiani

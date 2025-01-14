@@ -5,26 +5,18 @@
 ## Check if live system is already configured
 [ -e /.livesys-configured ] && exit 0
 
+source /.profile
+
 echo 'Setup liveuser'
 ## Add liveuser user with no passwd
 useradd --comment "Live System User" --create-home --shell /usr/bin/bash liveuser
 passwd -d liveuser > /dev/null
-usermod -aG audio,video,lpadmin,adm,sudo liveuser > /dev/null
+usermod -aG audio,video,adm,sudo liveuser > /dev/null
 
-echo 'Setup livesys installer'
-### Calamares settings
-rsync -a /usr/local/libexec/livesys/calamares/ /etc/calamares/
-### Mask original installer actions
-desktop-file-edit --set-key=Hidden --set-value=true /usr/share/applications/install-debian.desktop
-desktop-file-edit --set-key=Hidden --set-value=true /etc/xdg/autostart/calamares-desktop-icon.desktop
-### Skip Calamares APT configuration (no need to modify because it's already set)
-sed -i 's/- sources-final/# sources-final/' /etc/calamares/settings.conf
-
-## Configure session at liveuser login
-echo 'source /usr/local/libexec/livesys/session-setup' >> '/usr/local/libexec/remix/session-setup'
-
-echo 'Setup graphical session'
-source /usr/local/libexec/livesys/graphical-setup
+if [[ "$kiwi_profiles" == *"LiveSystemGraphical"* ]]; then
+	echo 'Setup liveuser desktop'
+    source /usr/local/libexec/livesys/graphical-setup
+fi
 
 echo 'Finish liveuser setup'
 ## Make sure to set the right permissions for liveuser

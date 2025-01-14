@@ -1,3 +1,13 @@
+## 12.9.0 - 2025-01-14
+### Added
+- Extended security limits for audio group
+- Polkit rule for managing PackageKit with sudo group
+### Removed
+- Redundant localization configs
+### Changed
+- One session setup for both console and graphical mode
+- Automatic system timezone during install
+
 ## 12.8.0 - 2024-12-28
 ### Changed
 - Improve Calamares settings
