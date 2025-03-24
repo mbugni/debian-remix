@@ -70,11 +70,6 @@ fi
 systemctl enable machine-setup
 ## Replace default prompt system wide
 sed -i -e "s/PS1='.*'/\. \/etc\/profile\.d\/color-prompt\.sh/" /etc/bash.bashrc
-## Remove preferred browser icon in KDE taskmanager
-if [ -f /usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/config/main.xml ]; then
-    sed -i -e 's/\,preferred:\/\/browser//' \
-    /usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/config/main.xml
-fi
 ## Update system with latest software
 apt --assume-yes upgrade
 ## Install systemd-resolved here because it breaks previous scripts cause DNS resolution

@@ -1,3 +1,9 @@
+## 12.10.0 - 2025-03-24
+### Added
+- Zip tools
+### Changed
+- Reset the KDE preferred browser to fallback the default
+
 ## 12.9.0 - 2025-01-14
 ### Added
 - Extended security limits for audio group

@@ -3,7 +3,7 @@
 		<profile name="Console" description="Console environment">
 			<requires profile="BootCore"/>
 			<requires profile="CommonCore"/>
-			<requires profile="LiveSystemConsole"/>
+			<requires profile="LiveSystemCore"/>
 		</profile>
 		<profile name="Console-l10n" description="Console localization">
 			<requires profile="Console"/>

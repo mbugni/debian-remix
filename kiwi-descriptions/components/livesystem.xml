@@ -1,20 +1,14 @@
 <image>
 	<profiles>
 		<profile name="LiveSystemCore" description="Live system core components"/>
-		<profile name="LiveSystemConsole" description="Live system console">
-			<requires profile="LiveSystemCore"/>
-		</profile>
 		<profile name="LiveSystemGraphical" description="Live system graphical">
 			<requires profile="LiveSystemCore"/>
 		</profile>
 	</profiles>
 	<packages type="image" profiles="LiveSystemCore">
-		<!-- package name="kiwi-dracut-live"/ -->
 		<package name="dracut-live"/>
-		<package name="dracut-squash"/>
 		<package name="dracut-network"/>
-	</packages>
-	<packages type="image" profiles="LiveSystemConsole">
+		<package name="dracut-squash"/>
 		<package name="plymouth"/>
 	</packages>
 	<packages type="image" profiles="LiveSystemGraphical">

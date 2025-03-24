@@ -61,7 +61,7 @@ $ sudo podman start livebuild-deb12
 Choose a variant (eg: workstation with localization support) that corresponds to a profile (eg: `Workstation-l10n`).
 
 Available profiles/variants are:
-* `Minimal` (console only, mainly for testing)
+* `Console` (command line only, mainly for testing)
 * `Desktop` (minimal KDE environment with basic tools)
 * `Workstation` (KDE environment with more features like printing and scanning support)
 

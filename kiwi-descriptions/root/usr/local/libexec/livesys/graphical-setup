@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/usr/bin/bash
 #
 # graphical-setup: desktop settings for liveuser
 
@@ -44,8 +44,12 @@ rsync -a /usr/local/libexec/livesys/calamares/config/ /etc/calamares/
 ## Skip Calamares APT configuration (no need to modify because it's already set)
 sed -i 's/- sources-final/# sources-final/' /etc/calamares/settings.conf
 
-# Replace Discover icon in taskmanager with the installer icon
+# Replace Discover icon in KDE taskmanager with the installer icon
 sed -i -e 's/applications:org.kde.discover.desktop/applications:livesys-install.desktop/' \
+ /usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/config/main.xml
+
+## Remove preferred browser icon in KDE taskmanager
+sed -i -e 's/\,preferred:\/\/browser//' \
  /usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/config/main.xml
 
 # Additional settings for liveuser session
