@@ -21,43 +21,17 @@ $ git clone https://github.com/mbugni/debian-remix.git /<source-path>
 
 Choose or create a `<target-path>` folder where to put results.
 
-### Prepare the build container
+### Prepare the build environment
 Install Podman:
 
 ```shell
 $ sudo apt --assume-yes install podman containers-storage fuse-overlayfs
 ```
 
-Create the container for the build enviroment:
-
-```shell
-$ sudo podman build --file=/<source-path>/Containerfile --tag=livebuild:deb12
-```
-
-Initialize the container by running an interactive shell:
-
-```shell
-$ sudo podman run --privileged --network=host -it \
---volume=/<source-path>:/live/source:ro --volume=/<target-path>:/live/target \
---name=livebuild-deb12 --hostname=livebuild-deb12 livebuild:deb12 /usr/bin/bash
-```
-
-Exit from the build container. The container can be reused and upgraded multiple times.
-See [Podman docs][06] for more details.
-
-To enter again into the build container:
-
-```shell
-$ sudo podman start -ia livebuild-deb12
-```
+Install [podman-compose](https://github.com/containers/podman-compose/tree/main?tab=readme-ov-file#installation)
+1.3.0 or later.
 
 ### Build the image
-First, start the build container if not running:
-
-```shell
-$ sudo podman start livebuild-deb12
-```
-
 Choose a variant (eg: workstation with localization support) that corresponds to a profile (eg: `Workstation-l10n`).
 
 Available profiles/variants are:
@@ -67,21 +41,25 @@ Available profiles/variants are:
 
 For each variant you can append `-l10n` to get italian localization (eg: `Desktop-l10n`).
 
-Build the .iso image by running the `kiwi-ng` command:
+Build the .iso image by running the `podman-compose` command from the project root directory:
 
 ```shell
-$ sudo podman exec livebuild-deb12 kiwi-ng --profile=Workstation-l10n --type=iso \
---debug --color-output --shared-cache-dir=/live/target/cache system build \
---description=/live/source/kiwi-descriptions --target-dir=/live/target
+$ sudo podman-compose run --rm --env KIWI_PROFILE=<variant> \
+--env KIWI_TARGET_DIR=<target-path> live-build
 ```
 
 The build can take a while (30 minutes or more), it depends on your machine performances.
+Environment arguments are optional, available variables are:
 
-Remove unused resources when don't need anymore:
+| Variable        | Description             | Default value      |
+|:---------------:|:-----------------------:|:------------------:|
+| KIWI_PROFILE    | Image variant           | `Workstation-l10n` |
+| KIWI_TARGET_DIR | Build target directory  | `.`                |
+
+Remove unused images when finished:
 
 ```shell
-$ sudo podman container rm --force livebuild-deb12
-$ sudo podman image rm livebuild:deb12
+$ sudo podman image prune
 ```
 
 ## Transferring the image to a bootable media

@@ -1,3 +1,12 @@
+## 12.11.0 - 2025-06-02
+### Added
+- Image build using Podman compose
+- Power management and sensors support
+### Changed
+- Switch the boot spinner theme to BGRT (Boot Graphics Resource Table)
+### Removed
+- Mail Transfer Agent (MTA)
+
 ## 12.10.0 - 2025-03-24
 ### Added
 - Zip tools

@@ -1,0 +1,23 @@
+---
+name: "debian-remix"
+version: "3"
+services:
+
+  live-build:
+    image: "livebuild:deb12"
+    privileged: true
+    build:
+      context: .
+      args:
+        DEBIAN_VERSION: "12.11"
+    container_name: "livebuild-deb12"
+    hostname: "livebuild-deb12"
+    volumes:
+      - ".:/live/source:ro"
+      - "${KIWI_TARGET_DIR:-.}:/live/target"
+    command:
+      - >
+        kiwi-ng --profile=${KIWI_PROFILE:-Workstation-l10n} --type=iso --debug
+        --color-output --shared-cache-dir=/live/target/cache system build
+        --description=/live/source/kiwi-descriptions --target-dir=/live/target
+    restart: "no"

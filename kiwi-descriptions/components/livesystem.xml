@@ -18,8 +18,8 @@
 		<package name="calamares-settings-debian"/>
 	</packages>
 	<preferences>
-		<type image="iso" primary="true" flags="dmsquash" hybridpersistent_filesystem="ext4"
-				hybridpersistent="true"	volid="Debian_Remix" firmware="uefi" kernelcmdline="splash quiet">
+		<type image="iso" primary="true" flags="dmsquash" kernelcmdline="splash quiet" firmware="efi"
+				publisher="Debian Remix" volid="Debian_Remix" application_id="Debian_Remix">
 			<bootloader name="grub2"/>
 		</type>
 	</preferences>
