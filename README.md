@@ -45,7 +45,7 @@ Build the .iso image by running the `podman-compose` command from the project ro
 
 ```shell
 $ sudo podman-compose run --rm --env KIWI_PROFILE=<variant> \
---env KIWI_TARGET_DIR=<target-path> live-build
+--env KIWI_TARGET_DIR=<target-path> system-build
 ```
 
 The build can take a while (30 minutes or more), it depends on your machine performances.
@@ -68,13 +68,6 @@ USB stick using the `dd` command:
 
 ```shell
 $ sudo dd if=/<target-path>/Debian-Remix.x86_64-<version>.iso of=/dev/<stick-device>
-```
-
-## Post-install tasks
-After installation, remove live system resources to save space by running:
-
-```shell
-$ /usr/local/libexec/remix/livesys-cleanup
 ```
 
 ## ![Bandiera italiana][04] Per gli utenti italiani

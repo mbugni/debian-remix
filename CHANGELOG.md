@@ -1,3 +1,8 @@
+## 12.12.0 - 2025-09-21
+### Changed
+- Move clean up scripts to Calamares post-install
+- Set verbose log for Calamares
+
 ## 12.11.0 - 2025-06-02
 ### Added
 - Image build using Podman compose

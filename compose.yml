@@ -3,15 +3,13 @@ name: "debian-remix"
 version: "3"
 services:
 
-  live-build:
+  system-build:
     image: "livebuild:deb12"
     privileged: true
     build:
       context: .
       args:
-        DEBIAN_VERSION: "12.11"
-    container_name: "livebuild-deb12"
-    hostname: "livebuild-deb12"
+        DEBIAN_VERSION: "12.12"
     volumes:
       - ".:/live/source:ro"
       - "${KIWI_TARGET_DIR:-.}:/live/target"

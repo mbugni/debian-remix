@@ -36,13 +36,11 @@ desktop-file-edit --set-key=Hidden --set-value=true /usr/share/applications/inst
 desktop-file-edit --set-key=Hidden --set-value=true /etc/xdg/autostart/calamares-desktop-icon.desktop
 mv /usr/share/applications/calamares.desktop.orig /usr/share/applications/livesys-install.desktop
 ## Adjust installer launcher
-installer_cmd="$(find /usr/lib -name kdesu) calamares"
+installer_cmd="$(find /usr/lib -name kdesu) -c 'calamares -D6'"
 desktop-file-edit --set-key=Exec --set-value="$installer_cmd" /usr/share/applications/livesys-install.desktop
 
 ## Setup Calamares settings
 rsync -a /usr/local/libexec/livesys/calamares/config/ /etc/calamares/
-## Skip Calamares APT configuration (no need to modify because it's already set)
-sed -i 's/- sources-final/# sources-final/' /etc/calamares/settings.conf
 
 # Replace Discover icon in KDE taskmanager with the installer icon
 sed -i -e 's/applications:org.kde.discover.desktop/applications:livesys-install.desktop/' \

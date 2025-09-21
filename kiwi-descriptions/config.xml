@@ -8,7 +8,7 @@
 	</description>
 	<preferences>
 		<release-version>12</release-version>
-		<version>12.11.0</version>
+		<version>12.12.0</version>
 		<packagemanager>apt</packagemanager>
 		<rpm-check-signatures>false</rpm-check-signatures>
 		<locale>en_US</locale>
