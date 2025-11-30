@@ -56,12 +56,6 @@ Environment arguments are optional, available variables are:
 | KIWI_PROFILE    | Image variant           | `Workstation-l10n` |
 | KIWI_TARGET_DIR | Build target directory  | `.`                |
 
-Remove unused images when finished:
-
-```shell
-$ sudo podman image prune
-```
-
 ## Transferring the image to a bootable media
 You can use a tool like [Ventoy][07] to build multiboot USB devices, or simply transfer the image to a single
 USB stick using the `dd` command:

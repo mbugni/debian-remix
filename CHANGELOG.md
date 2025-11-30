@@ -1,3 +1,12 @@
+## 12.12.1 - 2025-11-30
+### Added
+- pulseaudio-utils package
+- systemd-journal group to default user
+- keymaps support for it layout
+### Removed
+- Redundant VPN support
+- xdg-desktop-portal-gnome package
+
 ## 12.12.0 - 2025-09-21
 ### Changed
 - Move clean up scripts to Calamares post-install

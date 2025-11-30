@@ -22,9 +22,9 @@
 		<!-- Hardware support -->
 		<package name="libsane-hpaio"/>
 		<!-- Networking -->
-		<package name="network-manager-l2tp"/>
+		<!-- package name="network-manager-l2tp"/>
 		<package name="network-manager-openvpn"/>
-		<package name="network-manager-pptp"/>
+		<package name="network-manager-pptp"/ -->
 		<!-- Printing -->
 		<package name="cups"/>
 		<package name="cups-ipp-utils"/>

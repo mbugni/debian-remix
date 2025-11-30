@@ -50,3 +50,7 @@ apt update
 export APT_LISTCHANGES_FRONTED=none DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true
 ## Setup base system
 tasksel install standard
+## Workaroud to address missing keymap for localectl systemd-firstboot. See:
+##		https://groups.google.com/g/kiwi-images/c/5zHockGLFy8
+apt --assume-yes install --no-install-recommends console-data
+ln -s /usr/share/keymaps/i386/qwerty/it.kmap.gz /usr/share/keymaps/i386/qwerty/it.map.gz

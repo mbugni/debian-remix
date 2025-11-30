@@ -11,8 +11,6 @@
 		</profile>
 	</profiles>
 	<packages type="image" profiles="Desktop">
-		<!-- Display server -->
-		<package name="xorg"/>
 		<!-- Display drivers -->
 		<package name="vdpau-driver-all"/>
 		<package name="va-driver-all"/>
@@ -37,6 +35,7 @@
 		<package name="alsa-utils"/>
 		<package name="ffmpeg"/>
 		<package name="gstreamer1.0-packagekit"/>
+		<package name="gstreamer1.0-pipewire"/>
 		<package name="gstreamer1.0-plugins-bad"/>
 		<package name="gstreamer1.0-plugins-good"/>
 		<package name="gstreamer1.0-plugins-ugly"/>
@@ -46,6 +45,7 @@
 		<package name="media-player-info"/>
 		<package name="pipewire-audio"/>
 		<package name="pipewire-jack"/>
+		<package name="pulseaudio-utils"/>
 		<!-- Networking -->
 		<package name="firewall-config"/>
 		<!-- System -->
@@ -110,7 +110,6 @@
 		<package name="svgpart"/>
 		<package name="sweeper"/>
 		<package name="xdg-desktop-portal-kde"/>
-		<package name="xdg-desktop-portal-gnome"/>
 	</packages>
 	<packages type="uninstall" profiles="Desktop">
 		<!-- Some apps like Firefox display bad fonts with this -->
