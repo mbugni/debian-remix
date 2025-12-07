@@ -32,7 +32,7 @@ AUTOMOUNTER_EOF
 echo 'Setup installer for liveuser'
 
 ## Hide original installer actions
-desktop-file-edit --set-key=Hidden --set-value=true /usr/share/applications/install-debian.desktop
+desktop-file-edit --set-key=Hidden --set-value=true /usr/share/applications/calamares-install-debian.desktop
 desktop-file-edit --set-key=Hidden --set-value=true /etc/xdg/autostart/calamares-desktop-icon.desktop
 mv /usr/share/applications/calamares.desktop.orig /usr/share/applications/livesys-install.desktop
 ## Adjust installer launcher

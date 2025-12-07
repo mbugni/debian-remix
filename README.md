@@ -25,11 +25,8 @@ Choose or create a `<target-path>` folder where to put results.
 Install Podman:
 
 ```shell
-$ sudo apt --assume-yes install podman containers-storage fuse-overlayfs
+$ sudo apt --assume-yes install podman podman-compose containers-storage fuse-overlayfs
 ```
-
-Install [podman-compose](https://github.com/containers/podman-compose/tree/main?tab=readme-ov-file#installation)
-1.3.0 or later.
 
 ### Build the image
 Choose a variant (eg: workstation with localization support) that corresponds to a profile (eg: `Workstation-l10n`).

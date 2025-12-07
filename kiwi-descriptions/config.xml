@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<image schemaversion="8.3" name="Debian-Remix" displayname="Debian 12 Remix">
+<image schemaversion="8.3" name="Debian-Remix" displayname="Debian 13 Remix">
 	<description type="system">
 		<author>Massimiliano Bugni</author>
 		<contact>massi.ergosum@gmail.com</contact>
 		<specification>Debian Remix</specification>
 	</description>
 	<preferences>
-		<release-version>12</release-version>
-		<version>12.12.1</version>
+		<release-version>13</release-version>
+		<version>13.2.0</version>
 		<packagemanager>apt</packagemanager>
 		<rpm-check-signatures>false</rpm-check-signatures>
 		<locale>en_US</locale>

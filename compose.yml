@@ -4,13 +4,14 @@ version: "3"
 services:
 
   system-build:
-    image: "livebuild:deb12"
+    image: "livebuild:deb13"
     privileged: true
     build:
       context: .
       args:
-        DEBIAN_VERSION: "12.12"
+        DEBIAN_VERSION: "13.2"
     volumes:
+      - "/dev:/dev"
       - ".:/live/source:ro"
       - "${KIWI_TARGET_DIR:-.}:/live/target"
     command:

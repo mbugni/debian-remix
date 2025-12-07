@@ -72,21 +72,19 @@ systemctl enable machine-setup
 sed -i -e "s/PS1='.*'/\. \/etc\/profile\.d\/color-prompt\.sh/" /etc/bash.bashrc
 ## Update system with latest software
 apt --assume-yes update && apt --assume-yes --fix-broken install && apt --assume-yes upgrade
-## Install systemd-resolved here because it breaks previous scripts cause DNS resolution
-apt --assume-yes install systemd-resolved libnss-resolve libnss-myhostname
 
 #======================================
 # System clean
 #--------------------------------------
 ## Purge old kernels (if any)
 ## See https://ostechnix.com/remove-old-unused-linux-kernels/
-last_kernel=$(dpkg --list | awk '{ print $2 }' | grep -E 'linux-image-.+-.+-.+' | \
+last_kernel=$(dpkg --list | awk '{ print $2 }' | grep -E 'linux-image-.+-.+' | \
 	sort --version-sort | tail --lines=1)
 echo "Purge old kernels and keep $last_kernel"
-dpkg --list | awk '{ print $2 }' | grep -E 'linux-image-.+-.+-.+' | \
+dpkg --list | awk '{ print $2 }' | grep -E 'linux-image-.+-.+' | \
 	{ grep --invert-match $last_kernel || true; } | xargs apt --assume-yes purge
 ## Do not need a Mail Transfer Agent (MTA)
-apt --assume-yes autoremove exim4-base
+apt --assume-yes autopurge exim4-base
 ## Clean software management cache
 apt clean
 

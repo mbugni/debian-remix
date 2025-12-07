@@ -14,16 +14,14 @@
 		<!-- Display drivers -->
 		<package name="vdpau-driver-all"/>
 		<package name="va-driver-all"/>
-		<!-- package name="mesa-dri-drivers"/ -->
-		<!-- package name="mesa-omx-drivers"/ -->
 		<package name="mesa-vulkan-drivers"/>
 		<package name="xserver-xorg-video-all"/>
 		<package name="xserver-xorg-video-intel"/>
 		<package name="xserver-xorg-input-evdev"/>
-		<package name="xserver-xorg-input-synaptics"/>
 		<!-- Display tools -->
 		<package name="mesa-utils"/>
 		<package name="vulkan-tools"/>
+		<package name="wayland-utils"/>
 		<!-- Fonts -->
 		<package name="fonts-noto-core"/>
 		<package name="fonts-noto-mono"/>
@@ -39,7 +37,6 @@
 		<package name="gstreamer1.0-plugins-bad"/>
 		<package name="gstreamer1.0-plugins-good"/>
 		<package name="gstreamer1.0-plugins-ugly"/>
-		<package name="gstreamer1.0-x"/>
 		<package name="libcanberra-pulse"/>
 		<package name="libjxl-tools"/>
 		<package name="media-player-info"/>
@@ -72,7 +69,7 @@
 		<package name="kactivities-bin"/>
 		<package name="kcalc"/>
 		<package name="kcharselect"/>
-		<package name="kde-config-systemd"/>
+		<!-- package name="kde-config-systemd"/ -->
 		<package name="kde-config-gtk-style"/>
 		<package name="kde-config-gtk-style-preview"/>
 		<package name="kde-style-breeze"/>
@@ -82,7 +79,7 @@
 		<package name="khelpcenter"/>
 		<package name="kinfocenter"/>
 		<package name="kio-extras"/>
-		<package name="kgamma5"/>
+		<package name="kgamma"/>
 		<package name="konsole"/>
 		<package name="kscreen"/>
 		<package name="ktexteditor-katepart"/>
@@ -110,11 +107,6 @@
 		<package name="svgpart"/>
 		<package name="sweeper"/>
 		<package name="xdg-desktop-portal-kde"/>
-	</packages>
-	<packages type="uninstall" profiles="Desktop">
-		<!-- Some apps like Firefox display bad fonts with this -->
-		<package name="xfonts-75dpi"/>
-		<package name="xfonts-100dpi"/>
 	</packages>
 	<packages type="image" profiles="Desktop-l10n">
 		<package name="featherpad-l10n"/>

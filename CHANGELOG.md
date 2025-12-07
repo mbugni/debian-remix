@@ -1,3 +1,15 @@
+## 13.2.0 - 2025-12-07
+### Added
+- Utils for KDE info center
+- Intel graphics and SOF firmware
+- dosfstools and zstd tools
+### Changed
+- Move to Debian 13 and KDE Plasma 6
+- systemd-resolved as regular package
+### Removed
+- Legacy podman-compose instructions
+- xserver-xorg-input-synaptics package
+
 ## 12.12.1 - 2025-11-30
 ### Added
 - pulseaudio-utils package
