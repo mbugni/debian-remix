@@ -1,0 +1,42 @@
+<image>
+	<profiles>
+		<profile name="Workstation" description="Workstation environment">
+			<requires profile="Desktop"/>
+		</profile>
+		<profile name="Workstation-l10n" description="Workstation localization">
+			<requires profile="Workstation"/>
+			<requires profile="Desktop-l10n"/>
+		</profile>
+	</profiles>
+	<packages type="image" profiles="Workstation">
+		<!-- Bluetooth -->
+		<package name="tdebluez-trinity"/>
+		<package name="bluez-firmware"/>
+		<package name="bluez-obexd"/>
+		<package name="bluez-tools"/>
+		<!-- Connectivity -->
+		<package name="tdebase-tdeio-plugins-trinity"/>
+		<!-- Hardware support -->
+		<package name="libsane-hpaio"/>
+		<!-- Networking -->
+		<package name="smbclient"/>
+		<!-- Printing -->
+		<package name="bluez-cups"/>
+		<package name="cups"/>
+		<package name="cups-browsed"/>
+		<package name="cups-filters"/>
+		<package name="cups-ipp-utils"/>
+		<package name="cups-pk-helper"/>
+		<package name="ghostscript"/>
+		<package name="ipp-usb"/>
+		<package name="printer-driver-gutenprint"/>
+		<package name="hplip"/>
+		<package name="paps"/>
+		<package name="tdeprint-trinity"/>
+		<package name="system-config-printer-common"/>
+		<package name="system-config-printer-udev"/>
+		<!-- Scanning -->
+		<package name="sane-airscan"/>
+		<package name="sane-utils"/>
+	</packages>
+</image>

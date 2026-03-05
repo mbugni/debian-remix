@@ -1,0 +1,11 @@
+[Unit]
+Description=Initialization for live system
+Before=display-manager.service
+ConditionKernelCommandLine=rd.live.image
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/share/livesys/systemd/boot-setup.sh
+
+[Install]
+WantedBy=multi-user.target

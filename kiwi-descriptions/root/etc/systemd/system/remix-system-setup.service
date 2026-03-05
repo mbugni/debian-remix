@@ -1,0 +1,12 @@
+[Unit]
+Description=System wide settings
+
+[Service]
+Type=oneshot
+Restart=no
+RemainAfterExit=no
+ExecStart=/usr/local/share/remix/systemd/system-setup.sh
+
+[Install]
+WantedBy=multi-user.target
+WantedBy=graphical.target

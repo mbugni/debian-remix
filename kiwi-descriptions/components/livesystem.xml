@@ -1,0 +1,31 @@
+<image>
+	<profiles>
+		<profile name="LiveSystemCore" description="Live system core components"/>
+		<profile name="LiveSystemGraphical" description="Live system graphical">
+			<requires profile="LiveSystemCore"/>
+		</profile>
+	</profiles>
+	<packages type="image" profiles="LiveSystemCore">
+		<package name="dracut-live"/>
+		<package name="dracut-network"/>
+		<package name="dracut-squash"/>
+		<package name="plymouth"/>
+	</packages>
+	<packages type="image" profiles="LiveSystemGraphical">
+		<!-- Calamares installer -->
+		<package name="calamares"/>
+		<package name="calamares-settings-debian"/>
+	</packages>
+	<preferences arch="i686">
+		<type image="iso" flags="dmsquash" firmware="bios" kernelcmdline="splash quiet"
+				publisher="Debian Remix" volid="Debian_Remix" application_id="Debian_Remix">
+			<bootloader name="grub2"/>
+		</type>
+	</preferences>
+	<preferences arch="x86_64">
+		<type image="iso" flags="dmsquash" firmware="efi" kernelcmdline="splash quiet"
+				publisher="Debian Remix" volid="Debian_Remix" application_id="Debian_Remix">
+			<bootloader name="grub2"/>
+		</type>
+	</preferences>
+</image>

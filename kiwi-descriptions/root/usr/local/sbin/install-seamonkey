@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# =================================================================
+# Ubuntuzilla Repository & SeaMonkey Installer (Advanced Security)
+# Target: Debian/Ubuntu-based distributions (i686 / x86_64)
+# Method: GPG Keyring with signed-by attribute
+# =================================================================
+
+# Configuration
+KEYRING_PATH="/usr/share/keyrings/ubuntuzilla.gpg"
+REPO_FILE="/etc/apt/sources.list.d/ubuntuzilla.list"
+KEY_ID="2667CA5C"
+KEYSERVER="keyserver.ubuntu.com"
+
+# Ensure the script is run as root
+if [ "$EUID" -ne 0 ]; then 
+  echo "Please run as root (use sudo)."
+  exit 1
+fi
+
+echo "--- Starting Secure Ubuntuzilla Setup ---"
+
+# 1. Install prerequisites
+echo "Step 1: Installing gnupg and wget..."
+apt-get update && apt-get install -y libdbus-glib-1-2 gnupg wget
+
+# 2. Import the GPG key into a dedicated binary keyring
+echo "Step 2: Importing GPG key $KEY_ID from $KEYSERVER..."
+# Remove old keyring if exists to avoid conflicts
+rm -f "$KEYRING_PATH"
+gpg --homedir /tmp --no-default-keyring --keyring "$KEYRING_PATH" --keyserver "$KEYSERVER" --recv-keys "$KEY_ID"
+
+# 3. Verify the key
+echo "Step 3: Verifying the imported key..."
+if gpg --no-default-keyring --keyring "$KEYRING_PATH" --list-keys "$KEY_ID" > /dev/null 2>&1; then
+    echo "SUCCESS: Key $KEY_ID verified in $KEYRING_PATH."
+else
+    echo "ERROR: Key verification failed. Check your connection to the keyserver."
+    exit 1
+fi
+
+# 4. Add the repository with the [signed-by] option
+echo "Step 4: Adding repository to $REPO_FILE..."
+echo "deb [signed-by=$KEYRING_PATH] https://downloads.sourceforge.net/project/ubuntuzilla/mozilla/apt all main" > "$REPO_FILE"
+
+# 5. Update and Install SeaMonkey
+echo "Step 5: Updating package lists and installing SeaMonkey..."
+apt-get update
+apt-get install -y seamonkey-mozilla-build
+
+# 6. Finalize
+echo "------------------------------------------------"
+echo "Installation complete!"
+echo "SeaMonkey is now managed by APT with a secure signed-by configuration."
+echo "Updates: Run 'sudo apt update && sudo apt upgrade' regularly."
+echo "------------------------------------------------"
