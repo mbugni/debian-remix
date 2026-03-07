@@ -1,11 +1,11 @@
 # Debian Remix
 
 ## Purpose
-This project builds a TDE ([Trinity Desktop Environment][02]) Linux and aims to be a complete system for personal computing with localization support. It is based on [Debian 11][08]. You can [download a live image][01] and try the software, and then install it in your PC if you want.
+This project builds a KDE ([KDE Desktop Environment][02]) Linux and aims to be a complete system for personal computing with localization support. It is based on [Debian 12][08]. You can [download a live image][01] and try the software, and then install it in your PC if you want.
 You can also customize the image starting from available scripts.
 
 Main goals of this system are:
-* lightweight enviroment suitable for old PC (legacy BIOS and/or 32-bit)
+* Flatpak apps usage
 * adding common extra-repos
 * supporting external devices (like printers and scanners)
 
@@ -31,13 +31,13 @@ $ sudo apt --assume-yes install podman containers-storage fuse-overlayfs
 Install [podman-compose](https://github.com/containers/podman-compose/tree/main?tab=readme-ov-file#installation)
 1.3.0 or later.
 
-### Build the image for amd64 platform
+### Build the image
 Choose a variant (eg: workstation with localization support) that corresponds to a profile (eg: `Workstation-l10n`).
 
 Available profiles/variants are:
 * `Console` (command line only, mainly for testing)
-* `Desktop` (minimal TDE environment with basic tools)
-* `Workstation` (TDE environment with more features like printing and scanning support)
+* `Desktop` (minimal KDE environment with basic tools)
+* `Workstation` (KDE environment with more features like printing and scanning support)
 
 For each variant you can append `-l10n` to get italian localization (eg: `Desktop-l10n`).
 
@@ -45,7 +45,7 @@ Build the .iso image by running the `podman-compose` command from the project ro
 
 ```shell
 $ sudo podman-compose run --rm --env KIWI_PROFILE=<variant> \
---env KIWI_TARGET_DIR=<target-path> system-build-amd64
+--env KIWI_TARGET_DIR=<target-path> system-build
 ```
 
 The build can take a while (30 minutes or more), it depends on your machine performances.
@@ -56,33 +56,19 @@ Environment arguments are optional, available variables are:
 | KIWI_PROFILE    | Image variant           | `Workstation-l10n` |
 | KIWI_TARGET_DIR | Build target directory  | `.`                |
 
-### Build the image for i386 platform
-
-The command is very similar to the `amd64` platform one:
-
-```shell
-$ sudo podman-compose run --rm --env KIWI_PROFILE=<variant> \
---env KIWI_TARGET_DIR=<target-path> system-build-i386
-```
-
-The standard resulting image is not bootable, so the build process fix it and produce a new
-`Debian-Remix.i386-bios.iso` image.
-
-See also [legacy systems tips](./legacy-systems-tips.md).
-
 ## Transferring the image to a bootable media
 You can use a tool like [Ventoy][07] to build multiboot USB devices, or simply transfer the image to a single
 USB stick using the `dd` command:
 
 ```shell
-$ sudo dd if=/<target-path>/Debian-Remix.i686-<version>.iso of=/dev/<stick-device>
+$ sudo dd if=/<target-path>/Debian-Remix.x86_64-<version>.iso of=/dev/<stick-device>
 ```
 
 ## ![Bandiera italiana][04] Per gli utenti italiani
-Questo progetto costruisce un sistema Linux con TDE ([Trinity Desktop Environment][02]) per computer ad uso personale con il supporto in italiano. È basato su [Debian 11][08]. Nell'[immagine .iso][01] che si ottiene sono già installati i pacchetti e le configurazioni per il funzionamento in italiano del sistema (come l'ambiente grafico, i repo extra etc).
+Questo progetto costruisce un sistema Linux con KDE ([KDE Desktop Environment][02]) per computer ad uso personale con il supporto in italiano. È basato su [Debian 12][08]. Nell'[immagine .iso][01] che si ottiene sono già installati i pacchetti e le configurazioni per il funzionamento in italiano del sistema (come l'ambiente grafico, i repo extra etc).
 
 Il sistema ha come obiettivi principali:
-* un ambiente grafico leggero adatto anche a vecchi PC (BIOS legacy e/o a 32-bit)
+* utilizzo delle applicazioni Flatpak
 * aggiunta dei repository comuni
 * supporto per dispositivi esterni (come stampanti e scanner)
 
@@ -92,10 +78,10 @@ All notable changes to this project will be documented in the [`CHANGELOG.md`](C
 The format is based on [Keep a Changelog][05].
 
 [01]: https://github.com/mbugni/debian-remix/releases
-[02]: https://www.trinitydesktop.org/
+[02]: https://kde.org/
 [03]: https://osinside.github.io/kiwi
 [04]: http://flagpedia.net/data/flags/mini/it.png
 [05]: https://keepachangelog.com/
 [06]: https://docs.podman.io/
 [07]: https://www.ventoy.net/
-[08]: https://www.debian.org/releases/bullseye
+[08]: https://www.debian.org/releases/bookworm

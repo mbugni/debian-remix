@@ -33,39 +33,22 @@ locale -a
 source /etc/os-release
 cat << EOF > /etc/apt/sources.list
 # See https://wiki.debian.org/SourcesList for more information
-deb https://deb.debian.org/debian $VERSION_CODENAME main contrib non-free
-#deb-src https://deb.debian.org/debian $VERSION_CODENAME main contrib non-free
+deb https://deb.debian.org/debian $VERSION_CODENAME main contrib non-free non-free-firmware
+#deb-src https://deb.debian.org/debian $VERSION_CODENAME main contrib non-free non-free-firmware
 
-deb https://deb.debian.org/debian $VERSION_CODENAME-updates main contrib non-free
-#deb-src https://deb.debian.org/debian $VERSION_CODENAME-updates main contrib non-free
+deb https://deb.debian.org/debian $VERSION_CODENAME-updates main contrib non-free non-free-firmware
+#deb-src https://deb.debian.org/debian $VERSION_CODENAME-updates main contrib non-free non-free-firmware
 
-deb https://security.debian.org/debian-security/ $VERSION_CODENAME-security main contrib non-free
-#deb-src https://security.debian.org/debian-security/ $VERSION_CODENAME-security main contrib non-free
+deb https://security.debian.org/debian-security/ $VERSION_CODENAME-security main contrib non-free non-free-firmware
+#deb-src https://security.debian.org/debian-security/ $VERSION_CODENAME-security main contrib non-free non-free-firmware
 EOF
 ## No interaction during install
 export APT_LISTCHANGES_FRONTEND=none DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true
-echo "--- Reconfigure APT database ---"
-dpkg --configure -a
 echo "--- Update package database ---"
 apt update --assume-yes
 echo "--- Setup base system ---"
-# dpkg options about existing config file:
-# --force-confold	keep current version
-# --force-confdef	apply default action
-# --force-confnew	overwrite existing version
-apt-get install --assume-yes -o Dpkg::Options::="--force-confnew" \
-    $(tasksel --task-packages standard) < /dev/null
+tasksel install standard
 ## Workaroud to address missing keymap for localectl systemd-firstboot. See:
 ##		https://groups.google.com/g/kiwi-images/c/5zHockGLFy8
 apt --assume-yes install --no-install-recommends console-data
 ln -s /usr/share/keymaps/i386/qwerty/it.kmap.gz /usr/share/keymaps/i386/qwerty/it.map.gz
-echo "--- Import Trinity GPG signing key ---"
-wget http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-keyring.deb && \
-dpkg --install trinity-keyring.deb && \
-## Add Trinity APT repository
-rm trinity-keyring.deb
-cat << EOF > /etc/apt/sources.list.d/trinity-desktop.list
-# TDE R14.1.x series
-deb http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x $VERSION_CODENAME main deps
-#deb-src http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x $VERSION_CODENAME main deps
-EOF

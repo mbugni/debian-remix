@@ -38,8 +38,13 @@ plymouth_theme="details"
 if [[ "$kiwi_profiles" == *"LiveSystemGraphical"* ]]; then
 	# Setup graphical system
 	systemctl set-default graphical.target
-	# Enable TDM login manager
-	systemctl enable tdm.service
+	# Setup graphical boot theme
+	plymouth_theme="bgrt"
+	# Enable user session setup
+	systemctl --global enable remix-session-setup.service
+	# Set up Flatpak
+	echo "Setting up Flathub repo..."
+	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 else
 	# Fallback to console system
 	systemctl set-default multi-user.target
@@ -48,27 +53,12 @@ fi
 /usr/sbin/plymouth-set-default-theme "${plymouth_theme}"
 
 #======================================
-# Setup localization
-#--------------------------------------
-if [[ "$kiwi_profiles" == *"l10n"* ]]; then
-	echo "Setup TDE keyboard layout ${kiwi_keytable}"
-	sed -i 's/^LayoutList=.*/LayoutList='${kiwi_keytable}'/' /etc/trinity/kxkbrc
-fi
-
-#======================================
 # Additional settings and tweaks
 #--------------------------------------
 ## Enable system wide settings
 systemctl enable remix-system-setup.service
 ## Update system with latest software
 apt --assume-yes update && apt --assume-yes --fix-broken install && apt --assume-yes upgrade
-## Hide legacy xterm icons
-mkdir /usr/local/share/applications
-for legacy_entry in xterm uxterm
-do
-    cp /usr/share/applications/debian-${legacy_entry}.desktop /usr/local/share/applications
-	echo "NoDisplay=true" >> /usr/local/share/applications/debian-${legacy_entry}.desktop
-done
 
 #======================================
 # System clean

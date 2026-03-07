@@ -15,6 +15,8 @@
 		<package name="firmware-linux-free"/>
 		<package name="firmware-linux-nonfree"/>
 		<package name="firmware-misc-nonfree"/>
+		<package name="fwupd"/>
+		<package name="fwupd-amd64-signed" arch="x86_64"/>
 		<!-- Hardware support -->
 		<package name="firmware-amd-graphics"/>
 		<package name="firmware-ath9k-htc"/>
@@ -29,7 +31,7 @@
 		<!-- Networking -->
 		<package name="libnss-mdns"/>
 		<package name="network-manager"/>
-		<package name="ufw"/> <!-- Firewall management -->
+		<package name="firewalld"/> <!-- Firewall management -->
 		<package name="avahi-daemon"/>
 		<package name="wireless-regdb"/>
 		<package name="wireless-tools"/>
@@ -38,7 +40,7 @@
 		<package name="initramfs-tools"/>
 		<package name="plymouth"/>
 		<package name="software-properties-common"/>
-		<package name="zram-tools"/>
+		<package name="systemd-zram-generator"/>
 		<!-- Tools -->
 		<package name="bash-completion"/>
 		<package name="bind9-utils"/>

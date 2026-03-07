@@ -14,10 +14,8 @@
 		<!-- Display server -->
 		<package name="xorg"/>
 		<!-- Display drivers -->
-		<package name="vdpau-driver-all"/>
+		<package name="intel-media-va-driver-non-free"/>
 		<package name="va-driver-all"/>
-		<!-- package name="mesa-dri-drivers"/ -->
-		<!-- package name="mesa-omx-drivers"/ -->
 		<package name="mesa-vulkan-drivers"/>
 		<package name="xserver-xorg-video-all"/>
 		<package name="xserver-xorg-video-intel"/>
@@ -34,18 +32,23 @@
 		<package name="alsa-ucm-conf"/> <!-- ALSA Use Case Manager -->
 		<package name="ffmpeg"/>
 		<package name="gstreamer1.0-packagekit"/>
+		<package name="gstreamer1.0-pipewire"/>
 		<package name="gstreamer1.0-plugins-bad"/>
 		<package name="gstreamer1.0-plugins-good"/>
 		<package name="gstreamer1.0-plugins-ugly"/>
 		<package name="gstreamer1.0-x"/>
 		<package name="libcanberra-pulse"/>
+		<package name="libjxl-tools"/>
 		<package name="media-player-info"/>
-		<package name="pulseaudio"/>
+		<package name="pipewire-audio"/>
+		<package name="pipewire-jack"/>
 		<package name="pulseaudio-utils"/>
 		<!-- Networking -->
-		<package name="gufw"/> <!-- Firewall management -->
+		<package name="firewall-config"/> <!-- Firewall management -->
 		<!-- System -->
+		<package name="flatpak"/>
 		<package name="lm-sensors"/>
+		<package name="power-profiles-daemon"/> <!-- Resource profiles -->
 		<package name="udisks2"/>
 		<package name="upower"/>
 		<!-- Desktop -->
@@ -55,41 +58,61 @@
 		<package name="xdg-utils"/>
 		<package name="task-desktop"/>
 		<package name="task-laptop"/>
-		<!-- Trinity Desktop Environment -->
-		<!-- desktop base -->
-		<package name="desktop-base-trinity"/>
-		<package name="polkit-agent-tde"/>
-		<package name="tdebase-trinity"/>
-		<!-- desktop apps -->
-		<package name="ark-trinity"/>
-		<package name="kcalc-trinity"/>
-		<package name="kcharselect-trinity"/>
-		<package name="kicker-applets-trinity"/>
-		<package name="kmilo-trinity"/>
-		<package name="ksnapshot-trinity"/>
-		<package name="kuser-trinity"/>
-		<package name="mplayerthumbs-trinity"/>
-		<package name="synaptic-trinity"/>
-		<package name="tdesudo-trinity"/>
-		<package name="xdg-desktop-portal-trinity"/>
-		<!-- device control -->
-		<package name="filelight-trinity"/>
-		<package name="kdf-trinity"/>
-		<package name="kmix-trinity"/>
-		<package name="krec-trinity"/>
-		<package name="kscd-trinity"/>
-		<package name="tdemid-trinity"/>
-		<package name="tdenetworkmanager-trinity"/>
-		<package name="tdepowersave-trinity"/>
-		<package name="tdescreensaver-trinity"/>
-		<!-- styles and themes -->
-		<package name="gtk2-engines"/>
-		<package name="gtk-qt-engine-trinity"/>
-		<package name="gtk3-tqt-engine-trinity"/>
-		<package name="tdeartwork-style-trinity"/>
-		<package name="tdmtheme-trinity"/>
+		<!-- KDE -->
+		<package name="aha"/> <!-- Convert terminal output to HTML for KDE tools -->
+		<package name="ark"/>
+		<package name="breeze-gtk-theme"/>
+		<package name="dolphin"/>
+		<package name="falkon"/>
+		<package name="featherpad"/>
+		<package name="ffmpegthumbs"/>
+		<package name="kde-config-flatpak"/>
+		<!-- package name="ibus"/ -->
+		<package name="kactivities-bin"/>
+		<package name="kcalc"/>
+		<package name="kcharselect"/>
+		<package name="kde-config-gtk-style"/>
+		<package name="kde-config-gtk-style-preview"/>
+		<package name="partitionmanager"/>
+		<package name="kde-style-breeze"/>
+		<package name="kdegraphics-thumbnailers"/>
+		<package name="plasma-runners-addons"/>
+		<package name="plasma-widgets-addons"/>
+		<package name="khelpcenter"/>
+		<package name="kinfocenter"/>
+		<package name="kio-extras"/>
+		<package name="kgamma5"/>
+		<package name="konsole"/>
+		<package name="kscreen"/>
+		<package name="ktexteditor-katepart"/>
+		<package name="kwalletmanager"/>
+		<package name="kwin-x11"/>
+		<package name="kwin-addons"/>
+		<package name="kwin-style-breeze"/>
+		<package name="libpam-kwallet5"/>
+		<package name="plasma-desktop"/>
+		<package name="plasma-discover"/>
+		<package name="plasma-discover-backend-flatpak"/>
+		<package name="plasma-discover-backend-fwupd"/>
+		<package name="milou"/>
+		<package name="plasma-nm"/> <!-- Network Manager -->
+		<package name="plasma-pa"/> <!-- Pulse Audio -->
+		<package name="plasma-systemmonitor"/>
+		<package name="plasma-thunderbolt"/>
+		<package name="plasma-workspace"/>
+		<package name="polkit-kde-agent-1"/>
+		<package name="powerdevil"/>
+		<package name="sddm"/>
+		<package name="sddm-theme-debian-breeze"/>
+		<package name="kde-config-sddm"/>
+		<package name="sonnet-plugins"/>
+		<package name="kde-spectacle"/>
+		<package name="svgpart"/>
+		<package name="sweeper"/>
+		<package name="xdg-desktop-portal-kde"/>
 	</packages>
 	<packages type="image" profiles="Desktop-l10n">
-		<package name="tde-i18n-it-trinity"/>
+		<package name="featherpad-l10n"/>
+		<package name="task-italian-kde-desktop"/>
 	</packages>
 </image>

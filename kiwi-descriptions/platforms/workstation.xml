@@ -10,12 +10,13 @@
 	</profiles>
 	<packages type="image" profiles="Workstation">
 		<!-- Bluetooth -->
-		<package name="tdebluez-trinity"/>
+		<package name="bluedevil"/>
 		<package name="bluez-firmware"/>
 		<package name="bluez-obexd"/>
 		<package name="bluez-tools"/>
 		<!-- Connectivity -->
-		<package name="tdebase-tdeio-plugins-trinity"/>
+		<package name="kdeconnect"/>
+		<package name="kio-extras"/>
 		<!-- Hardware support -->
 		<package name="libsane-hpaio"/>
 		<!-- Networking -->
@@ -32,7 +33,7 @@
 		<package name="printer-driver-gutenprint"/>
 		<package name="hplip"/>
 		<package name="paps"/>
-		<package name="tdeprint-trinity"/>
+		<package name="print-manager"/>
 		<package name="system-config-printer-common"/>
 		<package name="system-config-printer-udev"/>
 		<!-- Scanning -->

@@ -3,14 +3,13 @@ name: "debian-remix"
 version: "3"
 services:
 
-  system-build-amd64:
-    image: "livebuild:deb11-amd64"
-    platform: linux/amd64
+  system-build:
+    image: "livebuild:deb12"
     privileged: true
     build:
       context: .
       args:
-        DEBIAN_VERSION: "11.11"
+        DEBIAN_VERSION: "12.13"
     volumes:
       - ".:/live/source:ro"
       - "${KIWI_TARGET_DIR:-.}:/live/target"
@@ -19,33 +18,4 @@ services:
         kiwi-ng --profile=${KIWI_PROFILE:-Workstation-l10n} --type=iso --debug
         --color-output --shared-cache-dir=/live/target/cache system build
         --description=/live/source/kiwi-descriptions --target-dir=/live/target
-    restart: "no"
-
-  system-build-i386:
-    image: "livebuild:deb11-i386"
-    platform: linux/i386
-    privileged: true
-    build:
-      context: .
-      args:
-        DEBIAN_VERSION: "11.11"
-        IMAGE_REGISTRY: "docker.io/i386"
-    volumes:
-      - ".:/live/source:ro"
-      - "${KIWI_TARGET_DIR:-.}:/live/target"
-    command:
-      - >
-        linux32 kiwi-ng --profile=${KIWI_PROFILE:-Workstation-l10n} --type=iso --debug
-        --color-output --shared-cache-dir=/live/target/cache system build
-        --description=/live/source/kiwi-descriptions --target-dir=/live/target
-        &&
-        echo "--- Fixing iso image to boot legacy BIOS ---"
-        &&
-        xorriso -indev $$(ls /live/target/Debian-Remix.ix86-*.iso)
-        -outdev /live/target/Debian-Remix.i386-bios.iso -publisher Debian-Remix
-        -boot_image grub bin_path=boot/ix86/loader/eltorito.img
-        -boot_image grub grub2_mbr=/usr/lib/grub/i386-pc/boot_hybrid.img
-        -boot_image any grub2_boot_info=on -boot_image any boot_info_table=on
-        -boot_image any platform_id=0x00 -boot_image any emul_type=no_emulation
-        -joliet on -commit_eject all
     restart: "no"

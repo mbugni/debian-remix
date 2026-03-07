@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<image schemaversion="8.3" name="Debian-Remix" displayname="Debian Remix 11">
+<image schemaversion="8.3" name="Debian-Remix" displayname="Debian Remix 12">
 	<description type="system">
 		<author>Massimiliano Bugni</author>
 		<contact>massi.ergosum@gmail.com</contact>
 		<specification>Debian Remix</specification>
 	</description>
 	<preferences>
-		<release-version>11</release-version>
-		<version>11.11.0</version>
+		<release-version>12</release-version>
+		<version>12.13.0</version>
 		<packagemanager>apt</packagemanager>
 		<rpm-check-signatures>false</rpm-check-signatures>
 		<locale>en_US</locale>
@@ -16,7 +16,6 @@
 		<timezone>UTC</timezone>
 	</preferences>
 	<include from="this://./repositories/debian.xml"/>
-	<include from="this://./repositories/trinity.xml"/>
 	<include from="this://./components/boot.xml"/>
 	<include from="this://./components/common.xml"/>
 	<include from="this://./components/livesystem.xml"/>

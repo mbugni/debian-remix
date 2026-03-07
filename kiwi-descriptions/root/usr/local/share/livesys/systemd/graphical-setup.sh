@@ -3,54 +3,52 @@
 # graphical-setup: desktop settings for liveuser
 
 # Set up auto login for live user
-if [ -f /etc/trinity/tdm/tdmrc ]; then
-    sed -i 's/^AllowNullPasswd=.*/AllowNullPasswd=true/' /etc/trinity/tdm/tdmrc
-    sed -i 's/^#AutoLoginEnable=.*/AutoLoginEnable=true/' /etc/trinity/tdm/tdmrc
-    sed -i 's/^#AutoLoginUser=.*/AutoLoginUser=liveuser/' /etc/trinity/tdm/tdmrc
+if [ -f /etc/sddm.conf ]; then
+    sed -i 's/^#User=.*/User=liveuser/' /etc/sddm.conf
+    sed -i "s/^#Session=.*/Session=plasma.desktop/" /etc/sddm.conf
 else
-cat > /etc/trinity/tdm/tdmrc << TDM_EOF
-[X-*-Core]
-AllowNullPasswd=true
-AutoLoginEnable=true
-AutoLoginUser=liveuser
-TDM_EOF
+cat > /etc/sddm.conf << SDDM_EOF
+[Autologin]
+User=liveuser
+Session=plasma.desktop
+SDDM_EOF
 fi
+
+# Disable plasma-discover-notifier
+desktop-file-edit --set-key=Hidden --set-value=true /etc/xdg/autostart/org.kde.discover.notifier.desktop
+
+# Create config directory, if not exists
+mkdir /home/liveuser/.config
+
+# Disable automount of 'known' devices
+# https://bugzilla.redhat.com/show_bug.cgi?id=2073708
+cat > /home/liveuser/.config/kded_device_automounterrc << AUTOMOUNTER_EOF
+[General]
+AutomountEnabled=false
+AutomountOnLogin=false
+AutomountOnPlugin=false
+AUTOMOUNTER_EOF
+
+echo 'Setup installer for liveuser'
 
 ## Hide original installer actions
 desktop-file-edit --set-key=Hidden --set-value=true /usr/share/applications/install-debian.desktop
 desktop-file-edit --set-key=Hidden --set-value=true /etc/xdg/autostart/calamares-desktop-icon.desktop
 mv /usr/share/applications/calamares.desktop.orig /usr/share/applications/livesys-install.desktop
 ## Adjust installer launcher
-installer_cmd="/opt/trinity/bin/tdesu 'calamares -D6'"
+installer_cmd="$(find /usr/lib -name kdesu) -c 'calamares -D6'"
 desktop-file-edit --set-key=Exec --set-value="$installer_cmd" /usr/share/applications/livesys-install.desktop
 
 ## Setup Calamares settings
 rsync -a /usr/local/share/livesys/calamares/config/ /etc/calamares/
 
-# Add installer icon to liveuser desktop
-mkdir /home/liveuser/Desktop
-cp -a /usr/share/applications/livesys-install.desktop /home/liveuser/Desktop
-# Make installer icon executable to disable TDE security warning
-chmod +x /home/liveuser/Desktop/livesys-install.desktop
+# Replace Discover icon in KDE taskmanager with the installer icon
+sed -i -e 's/applications:org.kde.discover.desktop/applications:livesys-install.desktop/' \
+ /usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/config/main.xml
 
-# Default settings for liveuser
-mkdir -p /home/liveuser/.trinity/share/config
+## Remove preferred browser icon in KDE taskmanager
+sed -i -e 's/\,preferred:\/\/browser//' \
+ /usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/config/main.xml
 
-# Disable desktop media icons
-cat > /home/liveuser/.trinity/share/config/kdesktoprc << DESKTOP_EOF
-[Media]
-enabled=false
-DESKTOP_EOF
-
-# Disable new device popup during install
-cat > /home/liveuser/.trinity/share/config/mediamanagerrc << MEDIA_EOF
-[Global]
-AutostartEnabled=false
-DeviceMonitorPopupsEnabled=false
-NotificationPopupsEnabled=false
-MEDIA_EOF
- 
-if [ -f /etc/default/keyboard ]; then
-    source /etc/default/keyboard
-    localectl set-x11-keymap $XKBLAYOUT $XKBMODEL
-fi
+# Additional settings for liveuser session
+echo 'source /usr/local/share/livesys/systemd/session-setup.sh' >> '/usr/local/share/remix/systemd/session-setup.sh'

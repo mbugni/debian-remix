@@ -1,0 +1,13 @@
+[Unit]
+Description=User session setup
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+Restart=no
+RemainAfterExit=no
+ExecStart=/usr/local/share/remix/systemd/session-setup.sh
+
+[Install]
+WantedBy=graphical-session.target
