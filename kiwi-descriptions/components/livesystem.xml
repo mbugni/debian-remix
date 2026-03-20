@@ -4,6 +4,7 @@
 		<profile name="LiveSystemGraphical" description="Live system graphical">
 			<requires profile="LiveSystemCore"/>
 		</profile>
+		<profile name="LiveVirtualGuest" description="Live virtual guest system"/>
 	</profiles>
 	<packages type="image" profiles="LiveSystemCore">
 		<package name="dracut-live"/>
@@ -16,6 +17,10 @@
 		<!-- Calamares installer -->
 		<package name="calamares"/>
 		<package name="calamares-settings-debian"/>
+	</packages>
+	<packages type="image" profiles="LiveVirtualGuest">
+		<package name="qemu-guest-agent"/>
+		<package name="spice-vdagent"/>
 	</packages>
 	<preferences>
 		<type image="iso" primary="true" flags="dmsquash" kernelcmdline="splash quiet" firmware="efi"

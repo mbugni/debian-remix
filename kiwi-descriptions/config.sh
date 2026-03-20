@@ -13,7 +13,6 @@ echo "Profiles: [$kiwi_profiles]"
 #--------------------------------------
 ## Setup hostname	
 echo "${kiwi_iname,,}" > /etc/hostname
-echo "127.0.0.1 ${kiwi_iname,,}" >> /etc/hosts
 ## Clear machine-id on pre generated images
 truncate -s 0 /etc/machine-id
 
@@ -58,21 +57,20 @@ fi
 ## Enable system wide settings
 systemctl enable remix-system-setup.service
 ## Update system with latest software
-apt --assume-yes update && apt --assume-yes --fix-broken install && apt --assume-yes upgrade
+export APT_LISTCHANGES_FRONTEND=none DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true
+apt --assume-yes --fix-broken install && apt --assume-yes upgrade
 
 #======================================
 # System clean
 #--------------------------------------
 ## Purge old kernels (if any)
 ## See https://ostechnix.com/remove-old-unused-linux-kernels/
-last_kernel=$(dpkg --list | awk '{ print $2 }' | grep -E 'linux-image-.+-.+-.+' | \
+last_kernel=$(dpkg --list | awk '{ print $2 }' | grep -E 'linux-image-.+-.+' | \
 	sort --version-sort | tail --lines=1)
 echo "Purge old kernels and keep $last_kernel"
-dpkg --list | awk '{ print $2 }' | grep -E 'linux-image-.+-.+-.+' | \
-	{ grep --invert-match $last_kernel || true; } | xargs apt --assume-yes purge
-## Do not need a Mail Transfer Agent (MTA)
-apt --assume-yes autopurge exim4-base
+dpkg --list | awk '{ print $2 }' | grep -E 'linux-image-.+-.+' | \
+	{ grep --invert-match $last_kernel || true; } | xargs apt-get --assume-yes purge
 ## Clean software management cache
-apt clean
+apt-get clean
 
 exit 0

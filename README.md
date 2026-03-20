@@ -1,7 +1,7 @@
 # Debian Remix
 
 ## Purpose
-This project builds a KDE ([KDE Desktop Environment][02]) Linux and aims to be a complete system for personal computing with localization support. It is based on [Debian 12][08]. You can [download a live image][01] and try the software, and then install it in your PC if you want.
+This project builds a KDE ([KDE Desktop Environment][02]) Linux and aims to be a complete system for personal computing with localization support. It is based on [Debian 13][08]. You can [download a live image][01] and try the software, and then install it in your PC if you want.
 You can also customize the image starting from available scripts.
 
 Main goals of this system are:
@@ -9,7 +9,7 @@ Main goals of this system are:
 * adding common extra-repos
 * supporting external devices (like printers and scanners)
 
-## How to build the live image (on Debian 12)
+## How to build the live image (on Debian 13 or later)
 [See a detailed description][03] about how to build a live media using kiwi-ng.
 
 ### Prepare the working directories
@@ -25,11 +25,8 @@ Choose or create a `<target-path>` folder where to put results.
 Install Podman:
 
 ```shell
-$ sudo apt --assume-yes install podman containers-storage fuse-overlayfs
+$ sudo apt --assume-yes install podman podman-compose containers-storage fuse-overlayfs
 ```
-
-Install [podman-compose](https://github.com/containers/podman-compose/tree/main?tab=readme-ov-file#installation)
-1.3.0 or later.
 
 ### Build the image
 Choose a variant (eg: workstation with localization support) that corresponds to a profile (eg: `Workstation-l10n`).
@@ -65,7 +62,7 @@ $ sudo dd if=/<target-path>/Debian-Remix.x86_64-<version>.iso of=/dev/<stick-dev
 ```
 
 ## ![Bandiera italiana][04] Per gli utenti italiani
-Questo progetto costruisce un sistema Linux con KDE ([KDE Desktop Environment][02]) per computer ad uso personale con il supporto in italiano. È basato su [Debian 12][08]. Nell'[immagine .iso][01] che si ottiene sono già installati i pacchetti e le configurazioni per il funzionamento in italiano del sistema (come l'ambiente grafico, i repo extra etc).
+Questo progetto costruisce un sistema Linux con KDE ([KDE Desktop Environment][02]) per computer ad uso personale con il supporto in italiano. È basato su [Debian 13][08]. Nell'[immagine .iso][01] che si ottiene sono già installati i pacchetti e le configurazioni per il funzionamento in italiano del sistema (come l'ambiente grafico, i repo extra etc).
 
 Il sistema ha come obiettivi principali:
 * utilizzo delle applicazioni Flatpak
@@ -84,4 +81,4 @@ The format is based on [Keep a Changelog][05].
 [05]: https://keepachangelog.com/
 [06]: https://docs.podman.io/
 [07]: https://www.ventoy.net/
-[08]: https://www.debian.org/releases/bookworm
+[08]: https://www.debian.org/releases/trixie

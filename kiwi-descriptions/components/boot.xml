@@ -4,15 +4,13 @@
 	</profiles>
 	<packages type="image" profiles="BootCore">
 		<!-- System core -->
-		<package name="linux-image-amd64" arch="x86_64"/>
-		<package name="linux-image-686-pae" arch="i686"/>
+		<package name="linux-image-amd64"/>
 		<!-- Boot loader -->
-		<package name="efibootmgr" arch="x86_64"/>
-		<package name="grub-efi-amd64" arch="x86_64"/>
-		<package name="grub-efi-amd64-signed" arch="x86_64"/>
-		<package name="grub-pc" arch="i686"/>
+		<package name="efibootmgr"/>
+		<package name="grub-efi-amd64"/>
+		<package name="grub-efi-amd64-signed"/>
 		<package name="grub-pc-bin"/>
-		<package name="shim-signed" arch="x86_64"/>
+		<package name="shim-signed"/>
 	</packages>
 	<packages type="iso" profiles="BootCore">
 		<package name="grub-imageboot"/>

@@ -3,19 +3,56 @@ name: "debian-remix"
 version: "3"
 services:
 
-  system-build:
-    image: "livebuild:deb12"
+  # Common template for kiwi-ng container isolation
+  x-kiwi-ng-container: &kiwi-ng-container
+    image: "livebuild:deb13"
     privileged: true
+    devices:
+      - "/dev/loop-control"
+    # Note: Podman-compose appends the 'command' as the first positional argument.
+    # Since we use bash -c in the entrypoint, this argument is mapped to $$0.
+    entrypoint:
+      - /usr/bin/bash
+      - -c
+      - |
+        for i in $$(seq 0 7); do
+          if [ ! -b /dev/loop$$i ]; then
+            mknod /dev/loop$$i b 7 $$i
+          fi
+        done
+        echo "Running: $$0" && exec $$0
     build:
       context: .
       args:
-        DEBIAN_VERSION: "12.13"
+        DEBIAN_VERSION: "13.4"
     volumes:
       - ".:/live/source:ro"
       - "${KIWI_TARGET_DIR:-.}:/live/target"
+    restart: "no"
+
+  # Build a live image
+  system-build:
+    <<: *kiwi-ng-container
     command:
       - >
         kiwi-ng --profile=${KIWI_PROFILE:-Workstation-l10n} --type=iso --debug
         --color-output --shared-cache-dir=/live/target/cache system build
         --description=/live/source/kiwi-descriptions --target-dir=/live/target
-    restart: "no"
+
+  # Build a live image with virtual guest support
+  system-build-guest:
+    <<: *kiwi-ng-container
+    command:
+      - >
+        kiwi-ng --profile=${KIWI_PROFILE:-Workstation-l10n} --profile=LiveVirtualGuest
+        --type=iso --debug --color-output --shared-cache-dir=/live/target/cache
+        system build --description=/live/source/kiwi-descriptions --target-dir=/live/target
+
+  # Create an image from the previously prepared root directory
+  system-create:
+    <<: *kiwi-ng-container
+    command:
+      - >
+        kiwi-ng --profile=${KIWI_PROFILE:-Workstation-l10n} --type=iso --debug
+        --color-output system create --root=/live/target/build/image-root
+        --target-dir=/live/target

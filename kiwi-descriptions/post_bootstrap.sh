@@ -45,10 +45,8 @@ EOF
 ## No interaction during install
 export APT_LISTCHANGES_FRONTEND=none DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true
 echo "--- Update package database ---"
-apt update --assume-yes
-echo "--- Setup base system ---"
-tasksel install standard
+apt-get update --assume-yes
 ## Workaroud to address missing keymap for localectl systemd-firstboot. See:
 ##		https://groups.google.com/g/kiwi-images/c/5zHockGLFy8
-apt --assume-yes install --no-install-recommends console-data
+apt-get --assume-yes install --no-install-recommends console-data
 ln -s /usr/share/keymaps/i386/qwerty/it.kmap.gz /usr/share/keymaps/i386/qwerty/it.map.gz

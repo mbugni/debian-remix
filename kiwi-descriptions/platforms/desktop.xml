@@ -11,8 +11,6 @@
 		</profile>
 	</profiles>
 	<packages type="image" profiles="Desktop">
-		<!-- Display server -->
-		<package name="xorg"/>
 		<!-- Display drivers -->
 		<package name="intel-media-va-driver-non-free"/>
 		<package name="va-driver-all"/>
@@ -23,6 +21,7 @@
 		<!-- Display tools -->
 		<package name="mesa-utils"/>
 		<package name="vulkan-tools"/>
+		<package name="wayland-utils"/>
 		<!-- Fonts -->
 		<package name="fonts-noto-core"/>
 		<package name="fonts-noto-mono"/>
@@ -48,12 +47,13 @@
 		<!-- System -->
 		<package name="flatpak"/>
 		<package name="lm-sensors"/>
-		<package name="power-profiles-daemon"/> <!-- Resource profiles -->
+		<package name="tuned-ppd"/> <!-- Resource profiles -->
 		<package name="udisks2"/>
 		<package name="upower"/>
 		<!-- Desktop -->
 		<package name="desktop-file-utils"/>
 		<package name="laptop-detect"/>
+		<package name="libdisplay-info-bin"/> <!-- EDID e DisplayID info -->
 		<package name="xdg-user-dirs"/>
 		<package name="xdg-utils"/>
 		<package name="task-desktop"/>
@@ -71,6 +71,7 @@
 		<package name="kactivities-bin"/>
 		<package name="kcalc"/>
 		<package name="kcharselect"/>
+		<!-- package name="kde-config-systemd"/ -->
 		<package name="kde-config-gtk-style"/>
 		<package name="kde-config-gtk-style-preview"/>
 		<package name="partitionmanager"/>
@@ -81,7 +82,7 @@
 		<package name="khelpcenter"/>
 		<package name="kinfocenter"/>
 		<package name="kio-extras"/>
-		<package name="kgamma5"/>
+		<package name="kgamma"/>
 		<package name="konsole"/>
 		<package name="kscreen"/>
 		<package name="ktexteditor-katepart"/>
@@ -105,7 +106,7 @@
 		<package name="sddm"/>
 		<package name="sddm-theme-debian-breeze"/>
 		<package name="kde-config-sddm"/>
-		<package name="sonnet-plugins"/>
+		<package name="sonnet6-plugins"/>
 		<package name="kde-spectacle"/>
 		<package name="svgpart"/>
 		<package name="sweeper"/>

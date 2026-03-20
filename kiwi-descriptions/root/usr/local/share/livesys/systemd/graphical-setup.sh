@@ -32,7 +32,7 @@ AUTOMOUNTER_EOF
 echo 'Setup installer for liveuser'
 
 ## Hide original installer actions
-desktop-file-edit --set-key=Hidden --set-value=true /usr/share/applications/install-debian.desktop
+desktop-file-edit --set-key=Hidden --set-value=true /usr/share/applications/calamares-install-debian.desktop
 desktop-file-edit --set-key=Hidden --set-value=true /etc/xdg/autostart/calamares-desktop-icon.desktop
 mv /usr/share/applications/calamares.desktop.orig /usr/share/applications/livesys-install.desktop
 ## Adjust installer launcher
@@ -43,12 +43,12 @@ desktop-file-edit --set-key=Exec --set-value="$installer_cmd" /usr/share/applica
 rsync -a /usr/local/share/livesys/calamares/config/ /etc/calamares/
 
 # Replace Discover icon in KDE taskmanager with the installer icon
-sed -i -e 's/applications:org.kde.discover.desktop/applications:livesys-install.desktop/' \
- /usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/config/main.xml
+#sed -i -e 's/applications:org.kde.discover.desktop/applications:livesys-install.desktop/' \
+# /usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/config/main.xml
 
 ## Remove preferred browser icon in KDE taskmanager
-sed -i -e 's/\,preferred:\/\/browser//' \
- /usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/config/main.xml
+#sed -i -e 's/\,preferred:\/\/browser//' \
+# /usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/config/main.xml
 
 # Additional settings for liveuser session
-echo 'source /usr/local/share/livesys/systemd/session-setup.sh' >> '/usr/local/share/remix/systemd/session-setup.sh'
+echo 'source /usr/local/share/livesys/systemd/session-setup.sh' >> /usr/local/share/remix/systemd/session-setup.sh
